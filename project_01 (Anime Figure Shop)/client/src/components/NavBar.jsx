@@ -15,7 +15,7 @@ export default function NavBar() {
         <div className="relative">
           <FontAwesomeIcon icon={faCartArrowDown} className="text-3xl" />
 
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+          <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
             0
           </span>
         </div>
