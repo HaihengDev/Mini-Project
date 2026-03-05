@@ -1,6 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import productImg from '../assets/product.png';
 
-export default function Card({ index, name, stock, price }) {
+export default function Card({ index, name, stock, price, onAddToCart, _id }) {
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    const product = {
+      name,
+      stock,
+      price,
+    };
+    onAddToCart(product);
+  };
+
+  const handleLearnMore = () => {
+    navigate(`/${_id}`);
+  };
+
   return (
     <figure
       className={`relative w-full max-w-xs overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${index % 2 === 0 ? 'animate-fade-up' : 'animate-fade-down'}`}
@@ -29,12 +45,16 @@ export default function Card({ index, name, stock, price }) {
         </div>
 
         <div className="mt-2 flex items-center gap-2">
-          <button className="flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-700 cursor-pointer transition hover:bg-slate-50 active:scale-[0.98">
+          <button
+            className="flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-700 cursor-pointer transition hover:bg-slate-50 active:scale-[0.98"
+            onClick={handleLearnMore}
+          >
             Learn More
           </button>
           <button
             className="flex-1 rounded-lg bg-orange-500 px-3 py-2 text-sm font-bold text-white shadow-sm cursor-pointer transition hover:bg-orange-600 active:scale-[0.98] disable:cursor-not-allowed disable:bg-slate-300"
             disabled={stock <= 0}
+            onClick={handleAddToCart}
           >
             Add to cart
           </button>

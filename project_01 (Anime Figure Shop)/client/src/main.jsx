@@ -6,6 +6,7 @@ import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import Cart from './pages/Cart.jsx';
 import Admin from './pages/Admin.jsx';
+import LearnMore from './pages/LearnMore.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -16,6 +17,11 @@ const routes = createBrowserRouter([
       { path: '/cart', element: <Cart /> },
       { path: '/admin', element: <Admin /> },
     ],
+  },
+
+  {
+    path: '/:id',
+    element: <LearnMore />,
   },
 ]);
 
