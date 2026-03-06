@@ -15,6 +15,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Product price is required!'],
     },
+    image: {
+      type: String,
+      required: [true, 'Product image is required!'],
+    },
   },
   { timestamps: true },
 );

@@ -1,5 +1,9 @@
 const app = require('./middleware/app.js');
+const mongoose = require('mongoose');
 
-app.listen(process.env.PORT || 8000, () => {
-  console.log('Server is running on port 8000');
-});
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log('Database is connected successfully!'))
+  .catch((err) => console.log(err));
+
+app.listen(8000, () => console.log('Server running on port 8000'));

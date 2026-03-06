@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const {
   createProduct,
   getAllProducts,
@@ -9,7 +10,22 @@ const {
 
 const router = express.Router();
 
-router.route('/').post(createProduct).get(getAllProducts);
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // <-- save image to folder name uploads
+  },
+
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '.png', file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
+router
+  .route('/')
+  .post(upload.single('image'), createProduct)
+  .get(getAllProducts);
 router
   .route('/:id')
   .get(getProductById)

@@ -16,6 +16,7 @@ const createProduct = async (req, res) => {
       name,
       stock,
       price,
+      image: req.file.filename,
     });
 
     res.status(201).json({
@@ -159,7 +160,7 @@ const updateProduct = async (req, res) => {
 module.exports = {
   createProduct,
   getAllProducts,
-  getProductById,
-  deleteProduct,
-  updateProduct,
+  getProductById: async () => {},
+  deleteProduct: async () => {},
+  updateProduct: async () => {},
 };

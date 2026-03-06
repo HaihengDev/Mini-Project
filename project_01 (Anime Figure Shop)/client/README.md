@@ -7,5 +7,5 @@
 3. [x] Add to cart for add product to cart page. [required]
 4. [x] Learn more product for see detail of any product. [required]
 5. [x] In page cart have button to checkout no need to add transaction first just click it to checkout and successfully checkout. [required]
-6. [ ] Admin page for add, update and delete any products in database. [required]
+6. [ ] Admin page for add, update and delete any products in database. [required] (complete add)
 7. [ ] Save add to cart in cart even closing page need to save it in local storage. [optional]
