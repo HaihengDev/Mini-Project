@@ -12,6 +12,11 @@ export default function Card({
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
+    if (stock <= 0) {
+      alert('Product is out of stock!');
+      return;
+    }
+
     const product = {
       name,
       stock,
@@ -61,7 +66,6 @@ export default function Card({
           </button>
           <button
             className="flex-1 rounded-lg bg-orange-500 px-3 py-2 text-sm font-bold text-white shadow-sm cursor-pointer transition hover:bg-orange-600 active:scale-[0.98] disable:cursor-not-allowed disable:bg-slate-300"
-            disabled={stock <= 0}
             onClick={handleAddToCart}
           >
             Add to cart
