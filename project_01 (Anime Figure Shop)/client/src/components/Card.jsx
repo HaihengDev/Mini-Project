@@ -1,7 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import productImg from '../assets/product.png';
 
-export default function Card({ index, name, stock, price, onAddToCart, _id }) {
+export default function Card({
+  index,
+  name,
+  stock,
+  price,
+  onAddToCart,
+  imgUrl,
+  _id,
+}) {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
@@ -9,6 +16,7 @@ export default function Card({ index, name, stock, price, onAddToCart, _id }) {
       name,
       stock,
       price,
+      imgUrl,
     };
     onAddToCart(product);
   };
@@ -23,7 +31,7 @@ export default function Card({ index, name, stock, price, onAddToCart, _id }) {
     >
       <div className="aspect-square w-full bg-slate-100 p-4">
         <img
-          src={productImg}
+          src={`http://localhost:8000/uploads/${imgUrl}`}
           alt={name}
           className="h-full w-full object-contain"
         />

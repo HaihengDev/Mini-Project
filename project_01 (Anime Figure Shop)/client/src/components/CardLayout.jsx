@@ -11,6 +11,7 @@ export default function CardLayout({ products, handleAddToCart }) {
           name={p.name}
           stock={p.stock}
           price={p.price}
+          imgUrl={p.image}
           onAddToCart={handleAddToCart}
         />
       ))}
