@@ -15,7 +15,7 @@ export const useMessages = (selectedUserId: string | null) => {
     if (!selectedUserId || !user) return;
     setLoading(true);
     axios
-      .get(`/api/messages${selectedUserId}`, {
+      .get(`/api/messages/${selectedUserId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then(({ data }) => setMessages(data))
@@ -37,11 +37,11 @@ export const useMessages = (selectedUserId: string | null) => {
       setMessages((prev) => [...prev, msg]);
     };
 
-    socket.on('receive_message', handleReceive);
+    socket.on('receiver_message', handleReceive);
     socket.on('message_sent', handleSent);
 
     return () => {
-      socket.off('receive_message', handleReceive);
+      socket.off('receiver_message', handleReceive);
       socket.off('message_sent', handleSent);
     };
   }, [socket, selectedUserId, user]);

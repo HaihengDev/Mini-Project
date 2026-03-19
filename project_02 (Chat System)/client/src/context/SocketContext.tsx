@@ -31,7 +31,7 @@ export const SocketProvider = ({ children }: { children: ReactNode }) => {
     return () => {
       s.disconnect();
     };
-  });
+  }, [user]);
 
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>
