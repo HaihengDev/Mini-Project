@@ -1,5 +1,5 @@
+import type { SyntheticEvent } from 'react';
 import { useState } from 'react';
-import type { FormEvent } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { data } = await axios.post('/api/auth/login', form);
