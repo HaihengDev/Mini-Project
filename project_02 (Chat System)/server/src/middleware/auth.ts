@@ -11,7 +11,8 @@ export const protect = async (
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
-  const token = req.body.authorization?.split(' ')[1];
+  const authHeader = req.headers.authorization || req.get('Authorization');
+  const token = authHeader?.split(' ')[1];
 
   if (!token) {
     res.status(401).json({

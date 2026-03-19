@@ -49,7 +49,11 @@ export const initSocket = (io: Server): void => {
             { path: 'receiver', select: 'username avatar' },
           ]);
 
-          io.to(data.receiverId).emit('receiver_message', populated);
+          const receiverSocketId = onlineUsers.get(data.receiverId);
+          if (receiverSocketId) {
+            io.to(receiverSocketId).emit('receiver_message', populated);
+          }
+
           socket.emit('message_sent', populated);
         } catch (err) {
           socket.emit('error', { message: 'Failed to send message!' });
@@ -57,13 +61,19 @@ export const initSocket = (io: Server): void => {
       },
     );
 
-    socket.on('typing', ({ receiverId }: { receiverId: string }) =>
-      io.to(receiverId).emit('user_typing', { senderId: userId }),
-    );
+    socket.on('typing', ({ receiverId }: { receiverId: string }) => {
+      const receiverSocketId = onlineUsers.get(receiverId);
+      if (receiverSocketId) {
+        io.to(receiverSocketId).emit('user_typing', { senderId: userId });
+      }
+    });
 
-    socket.on('stop_typing', ({ receiverId }: { receiverId: string }) =>
-      io.to(receiverId).emit('user_stop_typing', { sender: userId }),
-    );
+    socket.on('stop_typing', ({ receiverId }: { receiverId: string }) => {
+      const receiverSocketId = onlineUsers.get(receiverId);
+      if (receiverSocketId) {
+        io.to(receiverSocketId).emit('user_stop_typing', { sender: userId });
+      }
+    });
 
     // Disconnect
     socket.on('disconnect', async () => {
