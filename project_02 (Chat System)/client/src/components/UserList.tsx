@@ -33,7 +33,7 @@ export default function UserList({
               className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-800 transition text-left ${isSelected ? 'bg-gray-800 border-r-2 border-indigo-500' : ''}`}
             >
               <div className="relative shrink-0">
-                <div className="w-10 h-10 rounded-full bg-indigo-600 flex-items-center justify-center text-white font-semibold">
+                <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-semibold">
                   {u.username[0].toUpperCase()}
                 </div>
                 {isOnline && (
