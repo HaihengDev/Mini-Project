@@ -1,6 +1,6 @@
 import { supabase } from '../config/supabase';
 
-export const uploadFileToSupabase = async (file: any) => {
+export const uploadFileToSupabase = async (file: Express.Multer.File) => {
   const cleanName = file.originalname
     .replace(/\s+/g, '-')
     .replace(/[^\w.-]/g, '');
@@ -8,15 +8,22 @@ export const uploadFileToSupabase = async (file: any) => {
   const fileName = `${Date.now()}-${cleanName}`;
   const filePath = `products/${fileName}`;
 
-  const { error } = await supabase.storage
+  const { data, error } = await supabase.storage
     .from('my-bucket')
-    .upload(filePath, new Uint8Array(file.buffer), {
+    .upload(filePath, file.buffer, {
+      // ✅ Pass buffer directly
       contentType: file.mimetype,
+      upsert: false,
     });
 
-  if (error) throw error;
+  if (error) {
+    console.error('Supabase upload error:', error);
+    throw error;
+  }
 
-  const { data } = supabase.storage.from('my-bucket').getPublicUrl(filePath);
+  const { data: urlData } = supabase.storage
+    .from('my-bucket')
+    .getPublicUrl(filePath);
 
-  return data.publicUrl;
+  return urlData.publicUrl;
 };

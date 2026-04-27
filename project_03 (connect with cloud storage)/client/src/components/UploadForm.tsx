@@ -41,23 +41,22 @@ export default function UploadForm() {
 
     const formData = new FormData();
 
-    formData.append('product_name', form.name);
+    formData.append('name', form.name); // ✅ was 'product_name'
     formData.append('price', form.price);
-    formData.append('quantity_in_stock', form.stock);
+    formData.append('stock', form.stock); // ✅ was 'quantity_in_stock'
 
     if (image) {
-      formData.append('image', image); // MUST match multer field name
+      formData.append('image', image);
     }
 
     try {
       const res = await fetch('http://localhost:8888/api/products', {
         method: 'POST',
-        body: formData, // no headers needed
+        body: formData,
       });
 
       const data = await res.json();
       console.log(data);
-
       alert('Product created successfully!');
     } catch (error) {
       console.error(error);

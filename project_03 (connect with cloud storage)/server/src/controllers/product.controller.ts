@@ -34,10 +34,10 @@ export const createProduct = async (req: Request, res: Response) => {
       imgUrl,
     });
   } catch (err: any) {
-    console.error(err);
+    console.error('Full error:', JSON.stringify(err, null, 2)); // ✅ See the real error
     return res.status(500).json({
       message: 'Server Error',
-      Error: err,
+      error: err.message ?? err,
     });
   }
 };
