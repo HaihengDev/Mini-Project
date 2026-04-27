@@ -15,7 +15,7 @@ export const getAllProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const { product_name, price, discount } = req.body;
+    const { product_id, product_name, price, discount } = req.body;
     let image = null;
 
     if (req.file) {
@@ -24,8 +24,8 @@ export const createProduct = async (req, res) => {
     }
 
     const [result] = await pool.query(
-      `INSERT INTO products(name, imgUrl, price, discount) VALUES (?, ?, ?, ?)`,
-      [product_name, image, price, discount],
+      `INSERT INTO products(id, name, imgUrl, price, discount) VALUES (?, ?, ?, ?, ?)`,
+      [product_id, product_name, image, price, discount],
     );
 
     res.status(201).json({
