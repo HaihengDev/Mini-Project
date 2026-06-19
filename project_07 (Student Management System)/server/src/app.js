@@ -3,6 +3,7 @@ import { createServer } from 'http';
 import { connectDB } from './config/db.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
 import studentRouter from './routes/studentRoute.js';
 dotenv.config();
 
@@ -10,6 +11,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use('/api/students', studentRouter);
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 const server = createServer(app);
 
