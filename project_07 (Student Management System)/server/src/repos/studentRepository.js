@@ -5,8 +5,8 @@ class StudentRepository {
     return await Student.find();
   }
 
-  async findById() {
-    return await Student.findById();
+  async findById(id) {
+    return await Student.findById(id);
   }
 
   async create(studentData) {
