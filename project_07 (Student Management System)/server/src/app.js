@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import studentRouter from './routes/studentRoute.js';
 import roomRouter from './routes/roomRoute.js';
+import teacherRouter from './routes/teacherRoute.js';
 dotenv.config();
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/api/students', studentRouter);
 app.use('/api/rooms', roomRouter);
+app.use('/api/teachers', teacherRouter);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
