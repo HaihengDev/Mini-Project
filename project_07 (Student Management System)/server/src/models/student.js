@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const studentSchema = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
   studentId: {
     type: String,
     required: true,
