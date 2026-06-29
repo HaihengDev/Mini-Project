@@ -1,4 +1,4 @@
-import TeacherRepository from '../repos/teacherRepository';
+import TeacherRepository from '../repos/teacherRepository.js';
 
 class TeacherService {
   async getAll() {
