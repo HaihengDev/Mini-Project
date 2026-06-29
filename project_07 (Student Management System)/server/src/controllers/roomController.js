@@ -78,9 +78,7 @@ export const updateRoom = async (req, res) => {
 
     const updateData = req.body;
 
-    const updatedRoom = await roomService.updateRoom(id, updateData, {
-      new: true,
-    });
+    const updatedRoom = await roomService.updateRoom(id, updateData);
 
     res.status(200).json({
       message: 'Room updated!',
