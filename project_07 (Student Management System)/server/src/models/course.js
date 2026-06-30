@@ -18,6 +18,10 @@ const courseSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    lecturer: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true },
 );
