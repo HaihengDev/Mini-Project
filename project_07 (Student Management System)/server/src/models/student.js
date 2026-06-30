@@ -26,6 +26,10 @@ const studentSchema = new mongoose.Schema({
     of: Number,
     required: true,
   },
+  course: {
+    type: [String],
+    required: true,
+  },
 });
 
 export default mongoose.model('Student', studentSchema);
