@@ -1,5 +1,13 @@
+import NavBar from './components/NavBar.jsx';
+import AppRouter from './components/AppRouter.jsx';
+
 const App = () => {
-  return <h1>Start</h1>;
+  return (
+    <>
+      <NavBar />
+      <AppRouter />
+    </>
+  );
 };
 
 export default App;
