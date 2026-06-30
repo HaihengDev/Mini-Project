@@ -6,6 +6,10 @@ import Student from '../pages/Student.jsx';
 
 export const routes = [
   {
+    path: '/',
+    element: <Home />,
+  },
+  {
     path: '/home',
     element: <Home />,
   },

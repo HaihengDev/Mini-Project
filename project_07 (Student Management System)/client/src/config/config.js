@@ -1,5 +1,5 @@
 export const navBar = {
-  Home: '/home',
+  Home: '/',
   Room: '/room',
   Course: '/course',
   Teacher: '/teacher',

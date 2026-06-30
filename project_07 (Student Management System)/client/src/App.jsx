@@ -1,10 +1,10 @@
-import NavBar from './components/NavBar.jsx';
+import Header from './components/Header.jsx';
 import AppRouter from './components/AppRouter.jsx';
 
 const App = () => {
   return (
     <>
-      <NavBar />
+      <Header />
       <AppRouter />
     </>
   );
