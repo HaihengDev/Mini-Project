@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import courseService from '../services/courseService';
+import courseService from '../services/courseService.js';
 
 export const getAllCourses = async (req, res) => {
   try {
