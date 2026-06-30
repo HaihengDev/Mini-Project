@@ -1,5 +1,7 @@
+import CourseList from '../components/CourseList.jsx';
+
 const Page = () => {
-  return <h1>Course Page</h1>;
+  return <CourseList />;
 };
 
 export default Page;
