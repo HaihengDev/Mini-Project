@@ -6,6 +6,15 @@ const roomSchema = new mongoose.Schema(
       type: Number,
       unique: true,
     },
+    student: {
+      type: [String],
+      required: true,
+    },
+    teacher: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
   { timestamps: true },
 );
