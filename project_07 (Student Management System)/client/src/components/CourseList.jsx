@@ -3,7 +3,7 @@ import './style/course-list.css';
 
 export default function Course(courseId, courseName, startDate) {
   return (
-    <section id="course-table">
+    <section className="course-table">
       <table>
         <thead>
           <tr>
