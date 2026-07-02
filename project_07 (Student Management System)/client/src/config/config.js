@@ -5,11 +5,3 @@ export const navBar = {
   Teacher: '/teacher',
   Student: '/student',
 };
-
-export const tableHeader = [
-  'CourseId',
-  'CourseName',
-  'StartDate',
-  'EndDate',
-  'Lecturer',
-];

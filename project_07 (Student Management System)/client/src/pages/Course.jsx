@@ -1,6 +1,7 @@
-import CourseList from '../components/CourseList.jsx';
 import FormInput from '../components/FormInput.jsx';
+import TableHeader from '../components/TableHeader.jsx';
 import { courseForm } from '../config/inputForm.js';
+import { courseTableHeader } from '../config/tableConfig.js';
 
 const Page = () => {
   return (
@@ -18,7 +19,9 @@ const Page = () => {
         ))}
       </form>
 
-      <CourseList />
+      <table>
+        <TableHeader tableHeader={courseTableHeader} />
+      </table>
     </section>
   );
 };

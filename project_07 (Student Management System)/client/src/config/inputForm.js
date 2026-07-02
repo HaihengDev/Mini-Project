@@ -21,3 +21,13 @@ export const courseForm = [
     placeholder: '',
   },
 ];
+
+export const roomForm = [
+  {
+    id: 'room-id',
+    label: 'RoomId: ',
+    htmlFor: 'room-id',
+    type: 'text',
+    placeholder: 'Enter Room Id: ',
+  },
+];
