@@ -5,8 +5,6 @@ import { courseForm } from '../config/inputForm.js';
 const Page = () => {
   return (
     <section id="course-container">
-      <CourseList />
-
       <form>
         {courseForm.map((form) => (
           <FormInput
@@ -19,6 +17,8 @@ const Page = () => {
           />
         ))}
       </form>
+
+      <CourseList />
     </section>
   );
 };
