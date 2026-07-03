@@ -21,18 +21,6 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  score: {
-    type: Map,
-    of: Number,
-    required: true,
-  },
-  course: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Course',
-      required: true,
-    },
-  ],
 });
 
 export default mongoose.model('Student', studentSchema);

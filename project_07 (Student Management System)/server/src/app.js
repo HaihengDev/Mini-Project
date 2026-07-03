@@ -8,6 +8,7 @@ import studentRouter from './routes/studentRoute.js';
 import roomRouter from './routes/roomRoute.js';
 import teacherRouter from './routes/teacherRoute.js';
 import courseRouter from './routes/courseRoute.js';
+import enrollmetRouter from './routes/enrollmentRoute.js';
 dotenv.config();
 
 const app = express();
@@ -17,6 +18,7 @@ app.use('/api/students', studentRouter);
 app.use('/api/rooms', roomRouter);
 app.use('/api/teachers', teacherRouter);
 app.use('/api/courses', courseRouter);
+app.use('/api/enrollments', enrollmetRouter);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

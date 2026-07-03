@@ -23,12 +23,6 @@ const courseSchema = new mongoose.Schema(
       ref: 'Teacher',
       required: true,
     },
-    student: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Student',
-      },
-    ],
   },
   { timestamps: true },
 );
