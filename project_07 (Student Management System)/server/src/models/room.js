@@ -6,14 +6,16 @@ const roomSchema = new mongoose.Schema(
       type: Number,
       unique: true,
     },
-    student: {
-      type: [String],
-      required: true,
-    },
+    student: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Student',
+      },
+    ],
     teacher: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Teacher',
       required: true,
-      unique: true,
     },
   },
   { timestamps: true },

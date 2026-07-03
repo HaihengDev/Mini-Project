@@ -26,10 +26,13 @@ const studentSchema = new mongoose.Schema({
     of: Number,
     required: true,
   },
-  course: {
-    type: [String],
-    required: true,
-  },
+  course: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Course',
+      required: true,
+    },
+  ],
 });
 
 export default mongoose.model('Student', studentSchema);

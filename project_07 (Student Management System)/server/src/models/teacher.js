@@ -22,14 +22,16 @@ const teacherSchema = new mongoose.Schema({
     enum: ['Teacher', 'Director'],
     default: 'Teacher',
   },
-  responsible: {
-    type: [String],
-    required: true,
-  },
   salary: {
     type: Number,
     required: true,
   },
+  courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Course',
+    },
+  ],
 });
 
 export default mongoose.model('Teacher', teacherSchema);

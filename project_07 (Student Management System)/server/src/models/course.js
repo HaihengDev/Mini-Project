@@ -18,10 +18,17 @@ const courseSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    lecturer: {
-      type: String,
+    teacher: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Teacher',
       required: true,
     },
+    student: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Student',
+      },
+    ],
   },
   { timestamps: true },
 );
