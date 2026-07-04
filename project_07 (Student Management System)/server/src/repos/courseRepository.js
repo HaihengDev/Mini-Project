@@ -2,11 +2,11 @@ import Course from '../models/course.js';
 
 class CourseRepository {
   async findAll() {
-    return await Course.find();
+    return await Course.find().populate('teacher');
   }
 
   async findById() {
-    return await Course.findById(id);
+    return await Course.findById(id).populate('teacher');
   }
 
   async create(course) {
@@ -14,7 +14,9 @@ class CourseRepository {
   }
 
   async update(id, updateData) {
-    return await Course.findByIdAndUpdate(id, updateData, { new: true });
+    return await Course.findByIdAndUpdate(id, updateData, {
+      new: true,
+    }).populate('teacher');
   }
 
   async delete(id) {

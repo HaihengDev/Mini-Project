@@ -2,11 +2,11 @@ import Room from '../models/room.js';
 
 class RoomRepository {
   async findAll() {
-    return await Room.find();
+    return await Room.find().populate('teacher').populate('student');
   }
 
   async findById() {
-    return await Room.findById(id);
+    return await Room.findById(id).populate('teacher').populate('student');
   }
 
   async create(roomData) {
@@ -14,7 +14,9 @@ class RoomRepository {
   }
 
   async update(id, updateData) {
-    return await Room.findByIdAndUpdate(id, updateData, { new: true });
+    return await Room.findByIdAndUpdate(id, updateData, { new: true })
+      .populate('teacher')
+      .populate('student');
   }
 
   async delete(id) {
