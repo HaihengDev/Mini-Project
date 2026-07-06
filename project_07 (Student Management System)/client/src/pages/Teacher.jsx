@@ -1,5 +1,14 @@
+import TableHeader from '../components/TableHeader.jsx';
+import { teacherTableHeader } from '../config/tableConfig.js';
+
 const Page = () => {
-  return <h1>Teacher Page</h1>;
+  return (
+    <section id="teacher-container">
+      <table>
+        <TableHeader tableHeader={teacherTableHeader} />
+      </table>
+    </section>
+  );
 };
 
 export default Page;
