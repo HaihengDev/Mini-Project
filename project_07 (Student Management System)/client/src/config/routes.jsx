@@ -3,6 +3,7 @@ import Room from '../pages/Room.jsx';
 import Course from '../pages/Course.jsx';
 import Teacher from '../pages/Teacher.jsx';
 import Student from '../pages/Student.jsx';
+import Enrollment from '../pages/Enrollment.jsx';
 
 export const routes = [
   {
@@ -28,5 +29,9 @@ export const routes = [
   {
     path: '/student',
     element: <Student />,
+  },
+  {
+    path: '/enrollment',
+    element: <Enrollment />,
   },
 ];

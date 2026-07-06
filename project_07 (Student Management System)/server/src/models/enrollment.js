@@ -22,7 +22,8 @@ const enrollmentSchema = new mongoose.Schema(
     },
     grade: {
       type: String,
-      default: '',
+      enum: ['A', 'B', 'C', 'D', 'E', 'F'],
+      default: 'F',
     },
   },
   {

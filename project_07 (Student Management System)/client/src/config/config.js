@@ -4,4 +4,5 @@ export const navBar = {
   Course: '/course',
   Teacher: '/teacher',
   Student: '/student',
+  Enrollment: '/enrollment',
 };
