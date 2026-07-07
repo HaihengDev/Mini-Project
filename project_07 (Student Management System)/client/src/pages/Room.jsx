@@ -9,6 +9,7 @@ const Page = () => {
       <form>
         {roomForm.map((room) => (
           <FormInput
+            key={room.id}
             id={room.id}
             label={room.label}
             htmlFor={room.htmlFor}
