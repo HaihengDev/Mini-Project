@@ -5,7 +5,7 @@ import { studentForm } from '../config/inputForm.js';
 
 const Page = () => {
   return (
-    <section id="student-container">
+    <section id="container">
       <form>
         {studentForm.map((form) => (
           <FormInput

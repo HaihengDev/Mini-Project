@@ -5,7 +5,7 @@ import { roomForm } from '../config/inputForm.js';
 
 const Page = () => {
   return (
-    <section id="room-container">
+    <section id="container">
       <form>
         {roomForm.map((room) => (
           <FormInput

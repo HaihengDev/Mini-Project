@@ -5,7 +5,7 @@ import { courseTableHeader } from '../config/tableConfig.js';
 
 const Page = () => {
   return (
-    <section id="course-container">
+    <section id="container">
       <form>
         {courseForm.map((form) => (
           <FormInput

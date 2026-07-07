@@ -3,7 +3,7 @@ import { enrollmentTableHeader } from '../config/tableConfig.js';
 
 export default function Enrollment() {
   return (
-    <section id="enrollment-container">
+    <section id="container">
       <table>
         <TableHeader tableHeader={enrollmentTableHeader} />
       </table>

@@ -5,7 +5,7 @@ import { teacherForm } from '../config/inputForm.js';
 
 const Page = () => {
   return (
-    <section id="teacher-container">
+    <section id="container">
       <form>
         {teacherForm.map((form) => (
           <FormInput
