@@ -7,15 +7,8 @@ const Page = () => {
   return (
     <section id="container">
       <form>
-        {teacherForm.map((form) => (
-          <FormInput
-            key={form.id}
-            id={form.id}
-            label={form.label}
-            htmlFor={form.htmlFor}
-            type={form.type}
-            placeholder={form.placeholder}
-          />
+        {teacherForm.map((field) => (
+          <FormInput key={field.id} {...field} />
         ))}
       </form>
 

@@ -58,8 +58,17 @@ export const studentForm = [
     id: 'student-gender',
     label: 'Gender: ',
     htmlFor: 'student-gender',
-    type: 'text',
-    placeholder: 'Enter Student Gender: ',
+    type: 'radio',
+    selection: [
+      {
+        label: 'Male',
+        value: 'male',
+      },
+      {
+        label: 'Female',
+        value: 'female',
+      },
+    ],
   },
   {
     id: 'date-of-birth',
@@ -96,8 +105,11 @@ export const teacherForm = [
     id: 'teacher-gender',
     label: 'Gender: ',
     htmlFor: 'teacher-gender',
-    type: 'text',
-    placeholder: 'Enter Teacher Gender',
+    type: 'radio',
+    selection: [
+      { label: 'Male', value: 'male' },
+      { label: 'Female', value: 'female' },
+    ],
   },
   {
     id: 'role',
