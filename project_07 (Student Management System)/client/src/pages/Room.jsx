@@ -1,19 +1,44 @@
+import { useState } from 'react';
 import FormInput from '../components/FormInput.jsx';
 import TableHeader from '../components/TableHeader.jsx';
 import { roomTableHeader } from '../config/tableConfig.js';
 import { roomForm } from '../config/inputForm.js';
 
 const Page = () => {
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <section id="container">
-      <form>
-        {roomForm.map((field) => (
-          <FormInput key={field.id} {...field} />
-        ))}
-      </form>
+      {showForm && (
+        <div className="form-overlay">
+          <form
+            className="form-card"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setShowForm(false);
+            }}
+          >
+            <h2>Add Course</h2>
+
+            {roomForm.map((field) => (
+              <FormInput key={field.id} {...field} />
+            ))}
+
+            <div className="form-buttons">
+              <button type="submit">Save</button>
+              <button type="button" onClick={() => setShowForm(false)}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
       <table>
-        <TableHeader tableHeader={roomTableHeader} />
+        <TableHeader
+          tableHeader={roomTableHeader}
+          onAdd={() => setShowForm(true)}
+        />
       </table>
     </section>
   );
