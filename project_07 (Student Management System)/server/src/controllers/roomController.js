@@ -45,22 +45,24 @@ export const getRoomById = async (req, res) => {
 
 export const createRoom = async (req, res) => {
   try {
-    const { room } = req.body;
+    const { roomId, student, teacher } = req.body;
 
-    if (!room) {
+    if (!roomId) {
       res.status(400).json({
-        message: 'Room input is invalid!',
+        message: 'Please atleast input roomId',
       });
     }
 
-    const roomCreated = roomService.createRoom(room);
+    const room = { roomId, student, teacher };
+
+    const roomCreated = await roomService.createRoom(room);
 
     res.status(201).json({
-      message: 'Romm is created!',
+      message: 'Room is created!',
       roomCreated,
     });
   } catch (err) {
-    res.staus(500).json({
+    res.status(500).json({
       message: 'Server error!',
     });
   }

@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const roomSchema = new mongoose.Schema(
   {
     roomId: {
-      type: Number,
+      type: String,
       unique: true,
     },
     student: [
