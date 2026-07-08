@@ -5,7 +5,7 @@ import {
   createEnrollment,
   updateEnrollment,
   deleteEnrollment,
-} from '../controllers/enrollmentController';
+} from '../controllers/enrollmentController.js';
 
 const router = express.Router();
 router.get('/', getAllEnrollments);

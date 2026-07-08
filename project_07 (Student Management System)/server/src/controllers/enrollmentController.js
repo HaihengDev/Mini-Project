@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import enrollmentService from '../services/enrollmentService';
+import enrollmentService from '../services/enrollmentService.js';
 
 export const getAllEnrollments = async (req, res) => {
   try {
