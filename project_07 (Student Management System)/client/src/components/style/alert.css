@@ -1,8 +1,0 @@
-.alert {
-  background-color: var(--bg-sidebar);
-  color: var(--text-light);
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-}
