@@ -38,6 +38,15 @@ const Page = () => {
   };
   return (
     <section id="container">
+      <div className="table-container">
+        <table>
+          <TableHeader
+            tableHeader={roomTableHeader}
+            onAdd={() => setShowForm(true)}
+          />
+        </table>
+      </div>
+
       {showForm && (
         <div className="form-overlay">
           <form
@@ -69,13 +78,6 @@ const Page = () => {
           </form>
         </div>
       )}
-
-      <table>
-        <TableHeader
-          tableHeader={roomTableHeader}
-          onAdd={() => setShowForm(true)}
-        />
-      </table>
     </section>
   );
 };
