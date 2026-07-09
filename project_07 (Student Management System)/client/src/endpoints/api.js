@@ -1,4 +1,4 @@
-const apiUrl = import.meta.env.VITE_API_KEY;
+const apiUrl = 'http://localhost:8888/api';
 
 export const getAll = async (path) => {
   const response = await fetch(`${apiUrl}/${path}`);
@@ -29,9 +29,11 @@ export const create = async (path, data) => {
     body: JSON.stringify(data),
   });
 
+  const result = await response.json();
+
   if (!response.ok) {
     throw new Error('Failed to create!');
   }
 
-  return response.json();
+  return result;
 };

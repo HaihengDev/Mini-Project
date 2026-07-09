@@ -62,6 +62,8 @@ export const createRoom = async (req, res) => {
       roomCreated,
     });
   } catch (err) {
+    console.error(err);
+
     res.status(500).json({
       message: 'Server error!',
     });
