@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { create } from '../endpoints/api.js';
 import FormInput from '../components/FormInput.jsx';
 import TableHeader from '../components/TableHeader.jsx';
+import Alert from '../components/Alert.jsx';
 import { roomTableHeader } from '../config/tableConfig.js';
 import { roomForm } from '../config/inputForm.js';
 
@@ -10,6 +11,7 @@ const Page = () => {
   const [formData, setFormData] = useState({
     roomId: '',
   });
+  const [alert, setAlert] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,17 +29,29 @@ const Page = () => {
       await create('rooms', formData);
 
       setShowForm(false);
+      setAlert(true);
 
       setFormData({
         roomId: '',
       });
-      alert('Room is created!');
     } catch (err) {
       console.error(err);
     }
   };
+
+  const handleClose = () => {
+    setAlert(false);
+  };
+
   return (
     <section id="container">
+      {alert && (
+        <div className="alert">
+          <Alert text={'Room is created!'} />
+          <button onClick={() => setAlert(false)}>X</button>
+        </div>
+      )}
+
       <div className="table-container">
         <table>
           <TableHeader
@@ -49,14 +63,8 @@ const Page = () => {
 
       {showForm && (
         <div className="form-overlay">
-          <form
-            className="form-card"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setShowForm(false);
-            }}
-          >
-            <h2>Add Course</h2>
+          <form className="form-card" onSubmit={handleSubmit}>
+            <h2>Add Room</h2>
 
             {roomForm.map((field) => (
               <FormInput
@@ -68,9 +76,7 @@ const Page = () => {
             ))}
 
             <div className="form-buttons">
-              <button type="submit" onSubmit={handleSubmit}>
-                Save
-              </button>
+              <button type="submit">Save</button>
               <button type="button" onClick={() => setShowForm(false)}>
                 Cancel
               </button>

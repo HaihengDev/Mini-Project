@@ -24,9 +24,9 @@ export const courseForm = [
 
 export const roomForm = [
   {
-    id: 'room-id',
+    id: 'roomId',
     label: 'RoomId: ',
-    htmlFor: 'room-id',
+    htmlFor: 'roomId',
     type: 'text',
     placeholder: 'Enter Room Id: ',
   },

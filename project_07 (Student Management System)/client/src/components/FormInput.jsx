@@ -30,6 +30,7 @@ export default function FormInput({
       ) : (
         <input
           id={id}
+          name={id}
           type={type}
           placeholder={placeholder}
           value={value}
