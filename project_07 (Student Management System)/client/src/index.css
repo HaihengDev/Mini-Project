@@ -1,0 +1,36 @@
+:root {
+  --font-roboto: 'Roboto', sans-serif;
+
+  --text-primary: #000;
+  --bg-primary: #f9f9fb;
+
+  --color-primary: #1e90ff;
+  --hover-primary: #1573d1;
+
+  --text-sm: 0.8rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2rem;
+
+  --font-regular: 400;
+  --font-medium: 600;
+  --font-strong: 800;
+
+  --shadow-md: 2px 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font: var(--text-md) var(--font-roboto);
+  display: flex;
+  flex-direction: column;
+}
