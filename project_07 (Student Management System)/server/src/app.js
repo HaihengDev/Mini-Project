@@ -7,6 +7,7 @@ import studentRoute from './routes/studentRoute.js';
 import teacherRoute from './routes/teacherRoute.js';
 import courseRoute from './routes/courseRoute.js';
 import enrollmentRoute from './routes/enrollmentRoute.js';
+import studentDetailRoute from './routes/studentDetailRoute.js';
 dotenv.config();
 
 const app = express();
@@ -18,6 +19,7 @@ app.use('/api/students', studentRoute);
 app.use('/api/teachers', teacherRoute);
 app.use('/api/courses', courseRoute);
 app.use('/api/enrollments', enrollmentRoute);
+app.use('/api/detail', studentDetailRoute);
 
 const startServer = () => {
   try {

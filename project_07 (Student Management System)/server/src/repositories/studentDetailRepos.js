@@ -1,6 +1,6 @@
 import pool from '../config/db.js';
 
-class studentDetailRepos {
+class StudentDetailRepos {
   async findAll() {
     return await pool.query('SELECT * FROM studentDetails');
   }
@@ -12,3 +12,5 @@ class studentDetailRepos {
     );
   }
 }
+
+export default new StudentDetailRepos();
