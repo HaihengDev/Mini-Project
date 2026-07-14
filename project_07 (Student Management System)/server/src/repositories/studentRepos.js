@@ -14,6 +14,17 @@ class StudentRepos {
 
     return row;
   }
+
+  async create(student) {
+    const { id, firstName, lastName, gender } = student;
+
+    const [studentCreated] = await pool.query(
+      `INSERT INTO students (studentId, studentFirstName, studentLastName, gender) VALUE (?, ?, ?, ?)`,
+      [id, firstName, lastName, gender],
+    );
+
+    return studentCreated;
+  }
 }
 
 export default new StudentRepos();

@@ -37,3 +37,18 @@ export const getStudentById = async (req, res) => {
     });
   }
 };
+
+export const createStudent = async (req, res) => {
+  try {
+    const studentCreated = await studentService.create(req.body);
+
+    res.status(201).json({
+      message: 'Student is created successfully!',
+      studentCreated,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Server Error!',
+    });
+  }
+};
