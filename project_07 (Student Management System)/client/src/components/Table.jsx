@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { studentTableHeader } from '../config/config.js';
 import { getAllStudents } from '../endpoints/api.js';
 import './style/table.css';
 
-export default function Table() {
+export default function Table({ items }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [students, setStudents] = useState([]);
@@ -11,7 +11,7 @@ export default function Table() {
   useEffect(() => {
     async function fetchStudents() {
       try {
-        const data = await getAllStudents();
+        const data = await getAllStudents('students');
         setStudents(data.students ?? []);
       } catch (err) {
         setError(err.message);
@@ -28,7 +28,7 @@ export default function Table() {
   }
 
   if (error) {
-    return <h1>{error}</h1>;
+    setError('Failed to fetch!');
   }
 
   return (
@@ -41,7 +41,7 @@ export default function Table() {
         </tr>
         <tr>
           {studentTableHeader.map((header) => (
-            <th key={header}>{header}</th>
+            <th>{header}</th>
           ))}
         </tr>
       </thead>
@@ -49,7 +49,7 @@ export default function Table() {
       <tbody>
         {students.length === 0 ? (
           <tr>
-            <td colSpan={studentTableHeader.length}>No students found.</td>
+            <td>Studnet not found!</td>
           </tr>
         ) : (
           students.map((student) => (
