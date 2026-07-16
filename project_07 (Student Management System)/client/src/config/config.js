@@ -5,3 +5,10 @@ export const navBar = {
   Room: '/rooms',
   Course: '/courses',
 };
+
+export const studentTableHeader = [
+  'StudentId',
+  'StudentFirstName',
+  'StudentLastName',
+  'Gender',
+];
