@@ -1,5 +1,7 @@
+import Table from '../components/Table.jsx';
+
 const Page = () => {
-  return <h1>Student</h1>;
+  return <Table />;
 };
 
 export default Page;

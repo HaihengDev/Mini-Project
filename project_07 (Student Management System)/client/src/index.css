@@ -30,6 +30,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  padding: 1rem;
   font: var(--text-md) var(--font-roboto);
   display: flex;
   flex-direction: column;

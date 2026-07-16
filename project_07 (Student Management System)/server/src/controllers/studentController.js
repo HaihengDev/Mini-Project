@@ -4,7 +4,7 @@ export const getAllStudents = async (req, res) => {
   try {
     const students = await studentService.getAll();
 
-    res.status(200).json({ studnets });
+    res.status(200).json({ students });
   } catch (err) {
     res.status(500).json({
       message: 'Server Error!',
