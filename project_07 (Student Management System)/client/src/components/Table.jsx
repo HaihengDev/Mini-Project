@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { studentTableHeader } from '../config/config.js';
-import { getAllStudents } from '../endpoints/api.js';
+import { getAllStudents, exportList } from '../endpoints/api.js';
 import './style/table.css';
 
 export default function Table({ items }) {
@@ -28,15 +28,23 @@ export default function Table({ items }) {
   }
 
   if (error) {
-    setError('Failed to fetch!');
+    setError(error.message);
   }
+
+  const handleExport = async () => {
+    try {
+      await exportList('students');
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
   return (
     <table>
       <thead>
         <tr>
           <td colSpan={4} className="export">
-            <button>Export</button>
+            <button onClick={() => handleExport()}>Export</button>
           </td>
         </tr>
         <tr>
