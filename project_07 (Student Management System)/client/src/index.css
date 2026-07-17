@@ -35,3 +35,62 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+th,
+td {
+  padding: 14px 16px;
+  border: 1px solid #e5e5e5;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tr:nth-child(even):not(:first-child) {
+  background-color: #f9fafb;
+}
+
+tr:hover:not(:first-child) {
+  background-color: #f1f5f9;
+}
+
+.export {
+  text-align: right;
+  background: #fff;
+  border: none;
+  padding: 15px;
+}
+
+.export button {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.export button:hover {
+  background: #15803d;
+}
+
+.export button:active {
+  transform: scale(0.98);
+}
