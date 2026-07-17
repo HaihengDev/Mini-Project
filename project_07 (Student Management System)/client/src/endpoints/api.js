@@ -1,6 +1,6 @@
 const apiUrl = 'http://localhost:8888/api';
 
-export const getAllStudents = async (path) => {
+export const getAll = async (path) => {
   const response = await fetch(`${apiUrl}/${path}`);
 
   if (!response.ok) {

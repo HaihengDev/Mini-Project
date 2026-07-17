@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAllStudents } from '../endpoints/api.js';
+import { getAll } from '../endpoints/api.js';
 import { studentTableHeader } from '../config/config.js';
 import { handleExport } from '../services/handleExport.js';
 import TableHeader from '../components/TableHeader.jsx';
@@ -12,7 +12,7 @@ const Page = () => {
   useEffect(() => {
     async function fetchStudents() {
       try {
-        const data = await getAllStudents('students');
+        const data = await getAll('students');
         setStudents(data.students ?? []);
       } catch (err) {
         setError(err.message);
@@ -47,7 +47,7 @@ const Page = () => {
       <tbody>
         {students.length === 0 ? (
           <tr>
-            <td>Studnet not found!</td>
+            <td>Student is empty!</td>
           </tr>
         ) : (
           students.map((student) => (
