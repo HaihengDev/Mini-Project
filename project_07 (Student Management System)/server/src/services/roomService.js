@@ -8,6 +8,10 @@ class RoomService {
   async getById(id) {
     return await roomRepository.findById(id);
   }
+
+  async create(room) {
+    return await roomRepository.create(room);
+  }
 }
 
 export default new RoomService();

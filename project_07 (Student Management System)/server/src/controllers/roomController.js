@@ -35,6 +35,21 @@ export const findRoomById = async (req, res) => {
   }
 };
 
+export const createRoom = async (req, res) => {
+  try {
+    const roomCreated = await roomService.create(req.body);
+
+    res.status(201).json({
+      message: 'Room is created!',
+      roomCreated,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Server Error!',
+    });
+  }
+};
+
 export const exportList = async (req, res) => {
   try {
     const rooms = await roomService.getAll();
