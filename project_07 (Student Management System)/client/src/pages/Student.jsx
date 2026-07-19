@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import { getAll } from '../endpoints/api.js';
 import { studentTableHeader } from '../config/config.js';
 import { handleExport } from '../services/handleExport.js';
+import { studentInput } from '../config/Input.jsx';
+import InputForm from '../components/InputForm.jsx';
 import TableHeader from '../components/TableHeader.jsx';
 
 const Page = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [students, setStudents] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     async function fetchStudents() {
@@ -33,34 +36,59 @@ const Page = () => {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <td colSpan={4} className="export">
-            <button onClick={() => handleExport('students')}>Export</button>
-          </td>
-        </tr>
+    <section id="page-container">
+      {isOpen && (
+        <div className="modal-overlay">
+          <div className="form-container">
+            <InputForm inputElements={studentInput} />
 
-        <TableHeader headerRows={studentTableHeader} />
-      </thead>
+            <div className="btn-close-wrapper">
+              <button onClick={() => setIsOpen(false)}>X</button>
+            </div>
 
-      <tbody>
-        {students.length === 0 ? (
-          <tr>
-            <td>Student is empty!</td>
+            <div className="btn-wrapper">
+              <button onClick={() => setIsOpen(false)}>Cancel</button>
+              <button>Insert</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <table>
+        <thead>
+          <tr className="btn-wrapper">
+            <td colSpan={4} className="export">
+              <button onClick={() => setIsOpen(true)}>Add</button>
+              <button
+                onClick={() => handleExport('students')}
+                className="btn-export"
+              >
+                Export
+              </button>
+            </td>
           </tr>
-        ) : (
-          students.map((student) => (
-            <tr key={student.studentId}>
-              <td>{student.studentId}</td>
-              <td>{student.studentFirstName}</td>
-              <td>{student.studentLastName}</td>
-              <td>{student.gender}</td>
+
+          <TableHeader headerRows={studentTableHeader} />
+        </thead>
+
+        <tbody>
+          {students.length === 0 ? (
+            <tr>
+              <td>Student is empty!</td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ) : (
+            students.map((student) => (
+              <tr key={student.studentId}>
+                <td>{student.studentId}</td>
+                <td>{student.studentFirstName}</td>
+                <td>{student.studentLastName}</td>
+                <td>{student.gender}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </section>
   );
 };
 
