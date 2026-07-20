@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import { getAll } from '../endpoints/api.js';
 import { roomTableHeader } from '../config/config.js';
+import { roomInput } from '../config/input.js';
+import { handleExport } from '../services/handleExport.js';
+import InputForm from '../components/InputForm.jsx';
 import TableHeader from '../components/TableHeader.jsx';
 
 const Page = () => {
   const [rooms, setRooms] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     async function fetchRooms() {
@@ -32,31 +36,68 @@ const Page = () => {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <td colSpan={4} className="export">
-            <button>Export</button>
-          </td>
-        </tr>
-        <TableHeader headerRows={roomTableHeader} />
-      </thead>
+    <section id="page-container">
+      {isOpen && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-header">
+              <h2>Add Room</h2>
 
-      <tbody>
-        {rooms.length === 0 ? (
-          <tr>
-            <td>Room is empty!</td>
+              <button className="modal-close" onClick={() => setIsOpen(false)}>
+                ✕
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <InputForm inputElements={roomInput} />
+            </div>
+
+            <div className="modal-footer">
+              <button
+                className="btn btn-secondary"
+                onClick={() => setIsOpen(false)}
+              >
+                Cancel
+              </button>
+
+              <button className="btn btn-primary">Insert</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <table>
+        <thead>
+          <tr className="btn-wrapper">
+            <td colSpan={4} className="export">
+              <button onClick={() => setIsOpen(true)}>Add</button>
+              <button
+                onClick={() => handleExport('rooms')}
+                className="btn-export"
+              >
+                Export
+              </button>
+            </td>
           </tr>
-        ) : (
-          rooms.map((room) => (
-            <tr key={room.roomId}>
-              <td>{room.roomId}</td>
-              <td>{room.roomNumber}</td>
+          <TableHeader headerRows={roomTableHeader} />
+        </thead>
+
+        <tbody>
+          {rooms.length === 0 ? (
+            <tr>
+              <td>Room is empty!</td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ) : (
+            rooms.map((room) => (
+              <tr key={room.roomId}>
+                <td>{room.roomId}</td>
+                <td>{room.roomNumber}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </section>
   );
 };
 

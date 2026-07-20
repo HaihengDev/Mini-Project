@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getAll } from '../endpoints/api.js';
 import { studentTableHeader } from '../config/config.js';
 import { handleExport } from '../services/handleExport.js';
-import { studentInput } from '../config/Input.jsx';
+import { studentInput } from '../config/input.js';
 import InputForm from '../components/InputForm.jsx';
 import TableHeader from '../components/TableHeader.jsx';
 
@@ -39,16 +39,28 @@ const Page = () => {
     <section id="page-container">
       {isOpen && (
         <div className="modal-overlay">
-          <div className="form-container">
-            <InputForm inputElements={studentInput} />
+          <div className="modal">
+            <div className="modal-header">
+              <h2>Add Student</h2>
 
-            <div className="btn-close-wrapper">
-              <button onClick={() => setIsOpen(false)}>X</button>
+              <button className="modal-close" onClick={() => setIsOpen(false)}>
+                ✕
+              </button>
             </div>
 
-            <div className="btn-wrapper">
-              <button onClick={() => setIsOpen(false)}>Cancel</button>
-              <button>Insert</button>
+            <div className="modal-body">
+              <InputForm inputElements={studentInput} />
+            </div>
+
+            <div className="modal-footer">
+              <button
+                className="btn btn-secondary"
+                onClick={() => setIsOpen(false)}
+              >
+                Cancel
+              </button>
+
+              <button className="btn btn-primary">Insert</button>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ export const exportList = async (path) => {
 
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'student_list.xlsx';
+  link.download = `${path}_list.xlsx`;
 
   document.body.appendChild(link);
   link.click();
