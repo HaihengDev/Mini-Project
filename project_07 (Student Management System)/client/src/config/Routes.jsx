@@ -1,8 +1,10 @@
 import Home from '../pages/Home.jsx';
-import Student from '../pages/Student.jsx';
+import MainPage from '../components/MainPage.jsx';
 import Teacher from '../pages/Teacher.jsx';
 import Room from '../pages/Room.jsx';
 import Course from '../pages/Course.jsx';
+import { studentInput } from './input.js';
+import { studentTableHeader } from './config.js';
 
 const routes = [
   {
@@ -15,7 +17,13 @@ const routes = [
   },
   {
     path: '/students',
-    element: <Student />,
+    element: (
+      <MainPage
+        path="students"
+        inputElement={studentInput}
+        headerRows={studentTableHeader}
+      />
+    ),
   },
   {
     path: '/teachers',
