@@ -249,6 +249,87 @@ tr:hover:not(:first-child) {
   background: var(--bg-main);
 }
 
+.loading-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.spinner {
+  width: 55px;
+  height: 55px;
+  border: 6px solid #e5e7eb;
+  border-top: 6px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-container h2 {
+  color: #444;
+  font-size: 20px;
+}
+
+.error {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #dc2626;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.error-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f7fb;
+}
+
+.error-card {
+  width: 380px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.error-card h2 {
+  margin-bottom: 10px;
+  color: #dc2626;
+}
+
+.error-card p {
+  color: #555;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.btn-retry {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-retry:hover {
+  background: #1d4ed8;
+}
+
 @keyframes modalOpen {
   from {
     opacity: 0;
@@ -258,5 +339,11 @@ tr:hover:not(:first-child) {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

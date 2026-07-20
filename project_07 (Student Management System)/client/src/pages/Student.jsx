@@ -15,7 +15,15 @@ const Page = () => {
   useEffect(() => {
     async function fetchStudents() {
       try {
-        const data = await getAll('students');
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(
+            () => reject(new Error('Fetch failed (request time out)!')),
+            3000,
+          ),
+        );
+
+        const data = await Promise.race([getAll('students'), timeoutPromise]);
+
         setStudents(data.students ?? []);
       } catch (err) {
         setError(err.message);
@@ -28,11 +36,31 @@ const Page = () => {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <h2>Loading students...</h2>
+      </div>
+    );
   }
 
   if (error) {
-    setError(error.message);
+    return (
+      <div className="error-container">
+        <div className="error-card">
+          <div className="error-icon">⚠️</div>
+          <h2>Oops!</h2>
+          <p>{error}</p>
+
+          <button
+            className="btn-retry"
+            onClick={() => window.location.reload()}
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
