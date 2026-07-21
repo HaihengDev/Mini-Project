@@ -2,7 +2,7 @@ export const navBar = {
   Home: '/',
   Student: '/students',
   Teacher: '/teachers',
-  Room: '/rooms',
+  Class: '/classes',
   Course: '/courses',
 };
 

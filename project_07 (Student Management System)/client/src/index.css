@@ -104,7 +104,11 @@ tr:nth-child(even):not(:first-child) {
   background-color: var(--bg-main);
 }
 
-tr:hover:not(:first-child) {
+tr:nth-child(even):hover {
+  background-color: var(--color-primary-light);
+}
+
+tr:nth-child(odd):hover {
   background-color: var(--color-primary-light);
 }
 

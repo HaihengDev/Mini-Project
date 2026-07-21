@@ -24,7 +24,7 @@ const routes = [
     element: <Teacher />,
   },
   {
-    path: '/rooms',
+    path: '/classes',
     element: <Room />,
   },
   {
