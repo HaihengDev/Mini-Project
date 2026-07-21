@@ -20,13 +20,15 @@ const App = () => {
       <main
         className={`main-content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}
       >
-        <button
-          className="menu-toggle"
-          onClick={toggleSidebar}
-          aria-label={isSidebarOpen ? 'Close sidebar' : 'Open sidebar'}
-        >
-          ☰
-        </button>
+        {!isSidebarOpen && (
+          <button
+            className="menu-toggle"
+            onClick={toggleSidebar}
+            aria-label={isSidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+          >
+            ☰
+          </button>
+        )}
         <AppRouter />
       </main>
     </div>
