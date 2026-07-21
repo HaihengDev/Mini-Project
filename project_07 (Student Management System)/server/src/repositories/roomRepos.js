@@ -2,22 +2,22 @@ import pool from '../config/db.js';
 
 class RoomRepository {
   async findAll() {
-    const [rows] = await pool.query('SELECT * FROM rooms');
+    const [rows] = await pool.query('SELECT * FROM classes');
     return rows;
   }
 
   async findById(id) {
-    const [row] = await pool.query(`SELECT * FROM rooms WHERE roomId = ?`, [
+    const [row] = await pool.query(`SELECT * FROM rooms WHERE class_id = ?`, [
       id,
     ]);
     return row;
   }
 
   async create(room) {
-    const { roomId, roomNumber } = room;
+    const { class_name, academic_year } = room;
 
     const [result] = await pool.query(
-      `INSERT INTO rooms (roomId, roomNumber) VALUES (?, ?)`,
+      `INSERT INTO rooms (class_name, academic_year) VALUES (?, ?)`,
       [roomId, roomNumber],
     );
 

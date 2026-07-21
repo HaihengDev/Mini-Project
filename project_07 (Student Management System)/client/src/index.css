@@ -117,7 +117,7 @@ tr:hover:not(:first-child) {
 
 .export button {
   margin: 0 0 0 1rem;
-  background: var(--color-success);
+  background: var(--color-primary);
   color: var(--text-on-primary);
   border: none;
   padding: 10px 18px;
@@ -129,7 +129,7 @@ tr:hover:not(:first-child) {
 }
 
 .export button:hover {
-  background: #25a195;
+  background: var(--color-primary-hover);
 }
 
 .export button:active {

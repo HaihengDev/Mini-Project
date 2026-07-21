@@ -28,11 +28,16 @@ export const studentInput = [
   },
 ];
 
-export const roomInput = [
+export const classInput = [
   {
-    id: 'roomNumber',
-    label: 'roomNumber: ',
+    id: 'room_number',
+    label: 'Room Number: ',
     type: 'text',
     placeholder: 'Enter Room Number',
+  },
+  {
+    id: 'academic_year',
+    label: 'Academic Year: ',
+    type: 'academic_year',
   },
 ];

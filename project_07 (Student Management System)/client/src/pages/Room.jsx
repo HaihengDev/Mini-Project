@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAll } from '../endpoints/api.js';
-import { roomTableHeader } from '../config/config.js';
-import { roomInput } from '../config/input.js';
+import { classTableHeader } from '../config/config.js';
+import { classInput } from '../config/input.js';
 import { handleExport } from '../services/handleExport.js';
 import InputForm from '../components/InputForm.jsx';
 import TableHeader from '../components/TableHeader.jsx';
@@ -69,7 +69,7 @@ const Page = () => {
         <div className="modal-overlay">
           <div className="modal">
             <div className="modal-header">
-              <h2>Add Room</h2>
+              <h2>Add Class</h2>
 
               <button className="modal-close" onClick={() => setIsOpen(false)}>
                 ✕
@@ -77,7 +77,7 @@ const Page = () => {
             </div>
 
             <div className="modal-body">
-              <InputForm inputElements={roomInput} />
+              <InputForm inputElements={classInput} />
             </div>
 
             <div className="modal-footer">
@@ -107,7 +107,7 @@ const Page = () => {
               </button>
             </td>
           </tr>
-          <TableHeader headerRows={roomTableHeader} />
+          <TableHeader headerRows={classTableHeader} />
         </thead>
 
         <tbody>
@@ -117,9 +117,10 @@ const Page = () => {
             </tr>
           ) : (
             rooms.map((room) => (
-              <tr key={room.roomId}>
-                <td>{room.roomId}</td>
-                <td>{room.roomNumber}</td>
+              <tr key={room.class_id}>
+                <td>{room.class_id}</td>
+                <td>{room.class_name}</td>
+                <td>{room.academic_year}</td>
               </tr>
             ))
           )}

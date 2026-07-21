@@ -13,4 +13,4 @@ export const studentTableHeader = [
   'Gender',
 ];
 
-export const roomTableHeader = ['Room Id', 'Room Number'];
+export const classTableHeader = ['Class Id', 'Class Name', 'Academic Year'];

@@ -78,3 +78,38 @@
   accent-color: var(--color-primary);
   cursor: pointer;
 }
+
+/* Academic Year */
+.academic-year-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.academic-year-group .form-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.academic-year-group span {
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+}
+
+.academic-year-group .form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.academic-year-group input[type='number']::-webkit-inner-spin-button,
+.academic-year-group input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.academic-year-group input[type='number'] {
+  appearance: textfield;
+}

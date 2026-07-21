@@ -9,7 +9,25 @@ export default function InputForm({ inputElements }) {
             {input.label}
           </label>
 
-          {input.type === 'radio' ? (
+          {input.type === 'academic_year' ? (
+            <div className="academic-year-group">
+              <input
+                className="form-input"
+                type="number"
+                name="academic_year_start"
+                placeholder="2025"
+              />
+
+              <span>-</span>
+
+              <input
+                className="form-input"
+                type="number"
+                name="academic_year_end"
+                placeholder="2026"
+              />
+            </div>
+          ) : input.type === 'radio' ? (
             <div className="radio-group">
               {input.options.map((option) => (
                 <label className="radio-label" key={option.value}>
@@ -23,6 +41,7 @@ export default function InputForm({ inputElements }) {
               className="form-input"
               type={input.type}
               id={input.id}
+              name={input.id}
               placeholder={input.placeholder}
             />
           )}
