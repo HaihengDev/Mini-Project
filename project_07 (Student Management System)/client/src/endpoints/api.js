@@ -10,6 +10,22 @@ export const getAll = async (path) => {
   return response.json();
 };
 
+export const create = async (path, data) => {
+  const response = await fetch(`${apiUrl}/${path}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to create ${path}!`);
+  }
+
+  return response.json();
+};
+
 export const exportList = async (path) => {
   const response = await fetch(`${apiUrl}/${path}/download`);
 

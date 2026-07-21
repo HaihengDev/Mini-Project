@@ -30,10 +30,10 @@ export const studentInput = [
 
 export const classInput = [
   {
-    id: 'room_number',
-    label: 'Room Number: ',
+    id: 'class_name',
+    label: 'Class Name: ',
     type: 'text',
-    placeholder: 'Enter Room Number',
+    placeholder: 'Enter Class Name',
   },
   {
     id: 'academic_year',

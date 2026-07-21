@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getAll } from '../endpoints/api.js';
+import { useCallback, useEffect, useState } from 'react';
+import { create, getAll } from '../endpoints/api.js';
 import { classTableHeader } from '../config/config.js';
 import { classInput } from '../config/input.js';
 import { handleExport } from '../services/handleExport.js';
@@ -11,20 +11,26 @@ const Page = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const fetchRooms = useCallback(async () => {
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(
+        () => reject(new Error('Failed to fetch (request timeout)!')),
+        10000,
+      ),
+    );
+
+    const data = await Promise.race([getAll('rooms'), timeoutPromise]);
+
+    setRooms(data.rooms ?? []);
+  }, []);
 
   useEffect(() => {
-    async function fetchRooms() {
+    async function loadRooms() {
       try {
-        const timeoutPromise = new Promise((_, reject) =>
-          setTimeout(
-            () => reject(new Error('Failed to fetch (request timeout)!')),
-            10000,
-          ),
-        );
-
-        const data = await Promise.race([getAll('rooms'), timeoutPromise]);
-
-        setRooms(data.rooms ?? []);
+        await fetchRooms();
       } catch (err) {
         setError(err.message);
       } finally {
@@ -32,8 +38,32 @@ const Page = () => {
       }
     }
 
-    fetchRooms();
-  }, []);
+    loadRooms();
+  }, [fetchRooms]);
+
+  const handleCreateRoom = async (event) => {
+    event.preventDefault();
+    setSubmitError('');
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(event.currentTarget);
+      const academicYearStart = formData.get('academic_year_start');
+      const academicYearEnd = formData.get('academic_year_end');
+
+      await create('rooms', {
+        class_name: formData.get('class_name'),
+        academic_year: `${academicYearStart}-${academicYearEnd}`,
+      });
+
+      await fetchRooms();
+      setIsOpen(false);
+    } catch (err) {
+      setSubmitError(err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -77,7 +107,12 @@ const Page = () => {
             </div>
 
             <div className="modal-body">
-              <InputForm inputElements={classInput} />
+              <InputForm
+                formId="create-room-form"
+                inputElements={classInput}
+                onSubmit={handleCreateRoom}
+              />
+              {submitError && <p className="form-error">{submitError}</p>}
             </div>
 
             <div className="modal-footer">
@@ -88,7 +123,14 @@ const Page = () => {
                 Cancel
               </button>
 
-              <button className="btn btn-primary">Insert</button>
+              <button
+                className="btn btn-primary"
+                disabled={isSubmitting}
+                form="create-room-form"
+                type="submit"
+              >
+                {isSubmitting ? 'Inserting...' : 'Insert'}
+              </button>
             </div>
           </div>
         </div>

@@ -1,8 +1,8 @@
 import './style/input-form.css';
 
-export default function InputForm({ inputElements }) {
+export default function InputForm({ inputElements, formId, onSubmit }) {
   return (
-    <form className="form-wrapper">
+    <form className="form-wrapper" id={formId} onSubmit={onSubmit}>
       {inputElements.map((input) => (
         <div className="form-group" key={input.id}>
           <label className="form-label" htmlFor={input.id}>
@@ -14,8 +14,10 @@ export default function InputForm({ inputElements }) {
               <input
                 className="form-input"
                 type="number"
+                id="academic_year_start"
                 name="academic_year_start"
                 placeholder="2025"
+                required
               />
 
               <span>-</span>
@@ -23,15 +25,22 @@ export default function InputForm({ inputElements }) {
               <input
                 className="form-input"
                 type="number"
+                id="academic_year_end"
                 name="academic_year_end"
                 placeholder="2026"
+                required
               />
             </div>
           ) : input.type === 'radio' ? (
             <div className="radio-group">
               {input.options.map((option) => (
                 <label className="radio-label" key={option.value}>
-                  <input type="radio" name={input.id} value={option.value} />
+                  <input
+                    type="radio"
+                    name={input.id}
+                    value={option.value}
+                    required
+                  />
                   {option.label}
                 </label>
               ))}
@@ -43,6 +52,7 @@ export default function InputForm({ inputElements }) {
               id={input.id}
               name={input.id}
               placeholder={input.placeholder}
+              required
             />
           )}
         </div>

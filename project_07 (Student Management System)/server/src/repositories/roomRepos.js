@@ -7,7 +7,7 @@ class RoomRepository {
   }
 
   async findById(id) {
-    const [row] = await pool.query(`SELECT * FROM rooms WHERE class_id = ?`, [
+    const [row] = await pool.query(`SELECT * FROM classes WHERE class_id = ?`, [
       id,
     ]);
     return row;
@@ -17,8 +17,8 @@ class RoomRepository {
     const { class_name, academic_year } = room;
 
     const [result] = await pool.query(
-      `INSERT INTO rooms (class_name, academic_year) VALUES (?, ?)`,
-      [roomId, roomNumber],
+      `INSERT INTO classes (class_name, academic_year) VALUES (?, ?)`,
+      [class_name, academic_year],
     );
 
     return result;
