@@ -66,15 +66,34 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  width: 100vw;
-  height: 100vh;
-  padding: 1rem;
-  font: var(--text-md) var(--font-main);
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-main);
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+
   background-color: var(--bg-main);
   color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-main);
 }
 
 #page-container {
