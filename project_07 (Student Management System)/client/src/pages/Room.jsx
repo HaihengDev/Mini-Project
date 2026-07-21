@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { create, getAll } from '../endpoints/api.js';
 import { classTableHeader } from '../config/config.js';
 import { classInput } from '../config/input.js';
@@ -10,9 +10,12 @@ const Page = () => {
   const [rooms, setRooms] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+
   const [isOpen, setIsOpen] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [selectedAcademicYear, setSelectedAcademicYear] = useState('all');
 
   const fetchRooms = useCallback(async () => {
     const timeoutPromise = new Promise((_, reject) =>
@@ -41,6 +44,18 @@ const Page = () => {
     loadRooms();
   }, [fetchRooms]);
 
+  const academicYears = useMemo(() => {
+    return [...new Set(rooms.map((room) => room.academic_year))].sort();
+  }, [rooms]);
+
+  const filteredRooms = useMemo(() => {
+    if (selectedAcademicYear === 'all') {
+      return rooms;
+    }
+
+    return rooms.filter((room) => room.academic_year === selectedAcademicYear);
+  }, [rooms, selectedAcademicYear]);
+
   const handleCreateRoom = async (event) => {
     event.preventDefault();
     setSubmitError('');
@@ -48,6 +63,7 @@ const Page = () => {
 
     try {
       const formData = new FormData(event.currentTarget);
+
       const academicYearStart = formData.get('academic_year_start');
       const academicYearEnd = formData.get('academic_year_end');
 
@@ -57,6 +73,7 @@ const Page = () => {
       });
 
       await fetchRooms();
+
       setIsOpen(false);
     } catch (err) {
       setSubmitError(err.message);
@@ -112,6 +129,7 @@ const Page = () => {
                 inputElements={classInput}
                 onSubmit={handleCreateRoom}
               />
+
               {submitError && <p className="form-error">{submitError}</p>}
             </div>
 
@@ -136,29 +154,48 @@ const Page = () => {
         </div>
       )}
 
+      <div className="table-toolbar">
+        <div className="academic-year-filter">
+          <label htmlFor="academic-year">Academic Year:</label>
+
+          <select
+            id="academic-year"
+            value={selectedAcademicYear}
+            onChange={(event) => setSelectedAcademicYear(event.target.value)}
+          >
+            <option value="all">All Academic Years</option>
+
+            {academicYears.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="table-actions">
+          <button onClick={() => setIsOpen(true)}>Add</button>
+
+          <button onClick={() => handleExport('rooms')} className="btn-export">
+            Export
+          </button>
+        </div>
+      </div>
+
       <table>
         <thead>
-          <tr className="btn-wrapper">
-            <td colSpan={4} className="export">
-              <button onClick={() => setIsOpen(true)}>Add</button>
-              <button
-                onClick={() => handleExport('rooms')}
-                className="btn-export"
-              >
-                Export
-              </button>
-            </td>
-          </tr>
           <TableHeader headerRows={classTableHeader} />
         </thead>
 
         <tbody>
-          {rooms.length === 0 ? (
+          {filteredRooms.length === 0 ? (
             <tr>
-              <td>Room is empty!</td>
+              <td colSpan={classTableHeader.length}>
+                No classes found for this academic year.
+              </td>
             </tr>
           ) : (
-            rooms.map((room) => (
+            filteredRooms.map((room) => (
               <tr key={room.class_id}>
                 <td>{room.class_id}</td>
                 <td>{room.class_name}</td>
