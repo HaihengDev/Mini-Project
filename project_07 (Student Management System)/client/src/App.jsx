@@ -1,13 +1,20 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import SideBar from './components/SideBar.jsx';
 import AppRouter from './components/AppRouter.jsx';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const { pathname } = useLocation();
+  const isLoginPage = pathname === '/login';
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
   };
+
+  if (isLoginPage) {
+    return <AppRouter />;
+  }
 
   return (
     <div className="app-layout">
