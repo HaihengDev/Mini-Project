@@ -94,20 +94,20 @@ const Page = () => {
         </div>
       )}
 
+      <div className="table-toolbar" style={{ justifyContent: 'flex-end' }}>
+        <div className="table-actions">
+          <button onClick={() => setIsOpen(true)}>Add</button>
+          <button
+            onClick={() => handleExport('students')}
+            className="btn-export"
+          >
+            Export
+          </button>
+        </div>
+      </div>
+
       <table>
         <thead>
-          <tr className="btn-wrapper">
-            <td colSpan={4} className="export">
-              <button onClick={() => setIsOpen(true)}>Add</button>
-              <button
-                onClick={() => handleExport('students')}
-                className="btn-export"
-              >
-                Export
-              </button>
-            </td>
-          </tr>
-
           <TableHeader headerRows={studentTableHeader} />
         </thead>
 
