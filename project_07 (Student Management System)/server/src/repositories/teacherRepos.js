@@ -15,6 +15,44 @@ class TeacherRepository {
 
     return row;
   }
+
+  async create(teacher) {
+    const {
+      user_id,
+      employee_no,
+      first_name,
+      last_name,
+      gender,
+      phone,
+      joining_date,
+    } = teacher;
+
+    const [row] = await pool.query(
+      `INSERT INTO teachers (
+        user_id, 
+        employee_no, 
+        first_name, 
+        last_name, 
+        gender,
+        phone, 
+        joining_date) 
+      VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [
+        teacher_id,
+        user_id,
+        employee_no,
+        first_name,
+        last_name,
+        phone,
+        joining_date,
+      ],
+    );
+
+    return {
+      teacher_id: row.insertId,
+      ...teacher,
+    };
+  }
 }
 
 export default new TeacherRepository();
