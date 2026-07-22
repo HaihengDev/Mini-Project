@@ -14,3 +14,12 @@ export const studentTableHeader = [
 ];
 
 export const classTableHeader = ['Class Id', 'Class Name', 'Academic Year'];
+
+export const teacherTableHeader = [
+  'Teacher Id',
+  'First Name',
+  'Last Name',
+  'Gender',
+  'Phone',
+  'Joining Date',
+];

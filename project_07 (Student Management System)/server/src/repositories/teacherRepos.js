@@ -43,6 +43,7 @@ class TeacherRepository {
         employee_no,
         first_name,
         last_name,
+        gender,
         phone,
         joining_date,
       ],

@@ -45,6 +45,14 @@ export default function InputForm({ inputElements, formId, onSubmit }) {
                 </label>
               ))}
             </div>
+          ) : input.type === 'date' ? (
+            <input
+              className="form-input"
+              type="date"
+              id={input.id}
+              name={input.id}
+              required
+            />
           ) : (
             <input
               className="form-input"

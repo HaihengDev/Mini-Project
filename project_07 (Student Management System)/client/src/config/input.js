@@ -41,3 +41,50 @@ export const classInput = [
     type: 'academic_year',
   },
 ];
+
+export const teacherInput = [
+  {
+    id: 'employee_no',
+    label: 'Teacher Id: ',
+    type: 'text',
+    placeholder: 'Enter Teacher Id: ',
+  },
+  {
+    id: 'user_id',
+    label: 'User Id: ',
+    type: 'number',
+    placeholder: 'Enter User Id: ',
+  },
+  {
+    id: 'first_name',
+    label: 'First Name: ',
+    type: 'text',
+    placeholder: 'Enter First Name',
+  },
+  {
+    id: 'last_name',
+    label: 'Last Name: ',
+    type: 'text',
+    placeholder: 'Enter Last Name',
+  },
+  {
+    id: 'gender',
+    label: 'Gender: ',
+    type: 'radio',
+    options: [
+      { value: 'Male', label: 'Male' },
+      { value: 'Female', label: 'Female' },
+    ],
+  },
+  {
+    id: 'phone',
+    label: 'Phone: ',
+    type: 'text',
+    placeholder: 'Enter Phone Number',
+  },
+  {
+    id: 'joining_date',
+    label: 'Joining Date: ',
+    type: 'date',
+  },
+];
