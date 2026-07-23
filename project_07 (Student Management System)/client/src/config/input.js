@@ -88,3 +88,24 @@ export const teacherInput = [
     type: 'date',
   },
 ];
+
+export const courseInput = [
+  {
+    id: 'course_name',
+    label: 'Course Name: ',
+    type: 'text',
+    placeholder: 'Enter Course Name',
+  },
+  {
+    id: 'course_code',
+    label: 'Course Code: ',
+    type: 'text',
+    placeholder: 'Enter Course Code',
+  },
+  {
+    id: 'class_id',
+    label: 'Class: ',
+    type: 'select',
+    options: [],
+  },
+];

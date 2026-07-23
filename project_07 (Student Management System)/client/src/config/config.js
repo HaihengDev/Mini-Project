@@ -23,3 +23,10 @@ export const teacherTableHeader = [
   'Phone',
   'Joining Date',
 ];
+
+export const courseTableHeader = [
+  'Course Id',
+  'Course Name',
+  'Course Code',
+  'Class',
+];

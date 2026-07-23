@@ -53,6 +53,24 @@ export default function InputForm({ inputElements, formId, onSubmit }) {
               name={input.id}
               required
             />
+          ) : input.type === 'select' ? (
+            <select
+              className="form-input"
+              id={input.id}
+              name={input.id}
+              defaultValue={''}
+              required
+            >
+              <option value="" disabled>
+                Select {input.label.replace(':', '')}
+              </option>
+
+              {input.options?.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           ) : (
             <input
               className="form-input"
