@@ -14,6 +14,21 @@ class CourseRepository {
 
     return row;
   }
+
+  async create(course) {
+    const { course_name, course_code, class_id } = course;
+
+    const [row] = await pool.query(
+      `INSERT INTO courses (
+      course_name,
+      course_code,
+      class_id
+    ) VALUES (?, ?, ?)`,
+      [course_name, course_code, class_id],
+    );
+
+    return { course_id: row.insertId, ...course };
+  }
 }
 
 export default new CourseRepository();

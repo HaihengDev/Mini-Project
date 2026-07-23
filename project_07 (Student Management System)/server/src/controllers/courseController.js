@@ -39,3 +39,20 @@ export const getCourseById = async (req, res) => {
     });
   }
 };
+
+export const createCourse = async (req, res) => {
+  try {
+    const course = await courseService.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      message: 'Course is created successfully!',
+      course,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Server Error!',
+    });
+  }
+};
