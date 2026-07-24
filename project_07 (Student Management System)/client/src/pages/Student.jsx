@@ -3,6 +3,8 @@ import { getAll, create } from '../endpoints/api.js';
 import { studentTableHeader } from '../config/config.js';
 import { handleExport } from '../services/handleExport.js';
 import { studentInput } from '../config/input.js';
+import { ageCalculation } from '../utils/ageCalculation.js';
+import { formatDate } from '../utils/formatDate.js';
 import InputForm from '../components/InputForm.jsx';
 import TableHeader from '../components/TableHeader.jsx';
 
@@ -203,10 +205,12 @@ const Page = () => {
           ) : (
             students.map((student) => (
               <tr key={student.studentId}>
-                <td>{student.studentId}</td>
-                <td>{student.studentFirstName}</td>
-                <td>{student.studentLastName}</td>
+                <td>{student.student_id}</td>
+                <td>{student.first_name}</td>
+                <td>{student.last_name}</td>
+                <td>{formatDate(student.dob)}</td>
                 <td>{student.gender}</td>
+                <td>{ageCalculation(student.dob)}</td>
               </tr>
             ))
           )}
