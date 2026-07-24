@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import userRepos from '../repositories/userRepos.js';
 
 class UserService {
-  async register(user) {
+  async createUser(user) {
     const exist = await userRepos.findByEmail(user.email);
 
     if (exist) {
@@ -19,24 +19,6 @@ class UserService {
     });
 
     return id;
-  }
-
-  async login(email, password) {
-    const user = await userRepos.findByEmail(email);
-
-    if (!user) {
-      throw new Error('Invalid email or password.');
-    }
-
-    const matched = await bcrypt.compare(password, user.password);
-
-    if (!matched) {
-      throw new Error('Invalid email or password.');
-    }
-
-    await userRepos.updateLastLogin(user.user_id);
-
-    return user;
   }
 }
 

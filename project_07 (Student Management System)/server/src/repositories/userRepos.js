@@ -20,7 +20,7 @@ class UserRepos {
     const { username, email, password, role } = user;
 
     const [result] = await pool.query(
-      `INSERT INTO (username, email, password, role) VALUES (?, ?, ?, ?)`,
+      `INSERT INTO users(username, email, password, role) VALUES (?, ?, ?, ?)`,
       [username, email, password, role],
     );
 

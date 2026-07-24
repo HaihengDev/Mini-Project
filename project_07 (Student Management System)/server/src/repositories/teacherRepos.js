@@ -38,7 +38,6 @@ class TeacherRepository {
         joining_date) 
       VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
-        teacher_id,
         user_id,
         employee_no,
         first_name,
