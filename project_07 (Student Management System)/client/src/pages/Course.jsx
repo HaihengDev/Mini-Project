@@ -48,7 +48,7 @@ const Page = () => {
         const data = await getAll('rooms');
         setRooms(data.rooms);
       } catch (err) {
-        throw new Error('Failed to fetch rooms');
+        throw new Error('Failed to fetch rooms', { cause: err });
       }
     }
 

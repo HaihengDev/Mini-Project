@@ -7,9 +7,11 @@ import InputForm from '../components/InputForm.jsx';
 import TableHeader from '../components/TableHeader.jsx';
 
 const Page = () => {
+  const [rooms, setRooms] = useState([]);
+  const [students, setStudents] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [students, setStudents] = useState([]);
+
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -34,6 +36,35 @@ const Page = () => {
 
     fetchStudents();
   }, []);
+
+  useEffect(() => {
+    async function fetchAllRooms() {
+      try {
+        const data = await getAll('rooms');
+        setRooms(data.rooms ?? []);
+      } catch(err) {
+        throw new Error('Fetch all class failed!', {cause: err});
+      }
+    }
+
+    fetchAllRooms();
+  }, []);
+
+  const roomsOption = rooms.map((room) => ({
+    value: room.class_id,
+    label: `${room.class_name} (${room.academic_year})`,
+  }));
+
+  const studentFormInput = studentInput.map((input) => {
+    if(input.id === 'class_id') {
+      return {
+        ...input,
+        options: roomsOption
+      }
+    }
+
+    return input;
+  });
 
   if (loading) {
     return (
@@ -77,7 +108,7 @@ const Page = () => {
             </div>
 
             <div className="modal-body">
-              <InputForm inputElements={studentInput} />
+              <InputForm inputElements={studentFormInput} />
             </div>
 
             <div className="modal-footer">
@@ -114,7 +145,7 @@ const Page = () => {
         <tbody>
           {students.length === 0 ? (
             <tr>
-              <td>Student is empty!</td>
+              <td colSpan={studentTableHeader.length}>Student is empty!</td>
             </tr>
           ) : (
             students.map((student) => (

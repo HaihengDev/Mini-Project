@@ -1,32 +1,52 @@
 export const studentInput = [
   {
-    id: 'studentId',
-    label: 'Student ID: ',
+    id: 'student_id',
+    label: 'Student Id: ',
     type: 'text',
-    placeholder: 'Enter Student ID',
+    placeholder: 'Enter Student Id',
   },
   {
-    id: 'studentFirstName',
-    label: 'Student First Name: ',
+    id: 'first_name',
+    label: 'First Name: ',
     type: 'text',
-    placeholder: 'Enter Student First Name',
+    placeholder: 'Enter First Name',
   },
   {
-    id: 'studentLastName',
-    label: 'Student Last Name: ',
+    id: 'last_name',
+    label: 'Last Name: ',
     type: 'text',
-    placeholder: 'Enter Student Last Name',
+    placeholder: 'Enter Last Name',
   },
   {
-    id: 'studentGender',
+    id: 'dob',
+    label: 'Date Of Birth',
+    type: 'date',
+  },
+  {
+    id: 'gender',
     label: 'Gender: ',
     type: 'radio',
     options: [
       { value: 'Male', label: 'Male' },
       { value: 'Female', label: 'Female' },
-    ],
+    ]
   },
-];
+  {
+    id: 'class_id',
+    label: 'Class: ',
+    type: 'select',
+    options: [],
+  },
+  {
+    id: 'status',
+    label: 'Status: ',
+    type: 'radio',
+    options: [
+      { value: 'active', label: 'active' },
+      { value: 'graduated', label: 'graduated' },
+    ]
+  }
+]
 
 export const classInput = [
   {
