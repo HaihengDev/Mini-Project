@@ -35,6 +35,7 @@ export const getStudentById = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: 'Server Error!',
+      result: err.message,
     });
   }
 };
@@ -50,6 +51,7 @@ export const createStudent = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: 'Server Error!',
+      result: err.message,
     });
   }
 };

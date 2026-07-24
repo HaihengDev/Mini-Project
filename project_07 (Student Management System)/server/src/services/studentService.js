@@ -1,6 +1,6 @@
 import userService from './userService.js';
 import studentRepository from '../repositories/studentRepos.js';
-import {generatePassword} from "../utils/generatePassword.js";
+import { generatePassword } from '../utils/generatePassword.js';
 
 class StudentService {
   async getAll() {
@@ -12,39 +12,29 @@ class StudentService {
   }
 
   async create(student) {
-    const {
-      student_id,
-      first_name,
-      last_name,
-      dob,
-      gender,
-      class_id
-    } = student;
+    const { first_name, last_name, dob, gender, class_id } = student;
 
-    if(
-      !student_id ||
-      !first_name ||
-      !last_name ||
-      !dob ||
-      !gender ||
-      !class_id
-    ) {
+    if (!first_name || !last_name || !dob || !gender || !class_id) {
       throw new Error('All student information is required!');
     }
 
+    const randomNumber = Math.floor(Math.random() * 1000)
+      .toString()
+      .padStart(3, '0');
+
     const username = `${first_name.toLowerCase()}-${last_name.toLowerCase()}`;
-    const email = `${first_name.toLowerCase()}${last_name.toLowerCase()}@gmail.com`;
-    const password = generatePassword();
+    const email = `${first_name.toLowerCase()}${last_name.toLowerCase()}${randomNumber}@gmail.com`;
+    const password = await generatePassword();
+
+    console.log(password);
 
     const userId = await userService.createUser({
       username,
       email,
       password,
-      role: 'student',
     });
 
-    const studentId = await studentRepository({
-      student_id,
+    const studentCreated = await studentRepository.create({
       user_id: userId,
       first_name,
       last_name,
@@ -55,8 +45,8 @@ class StudentService {
 
     return {
       userId,
-      studentId
-    }
+      student: studentCreated,
+    };
   }
 }
 

@@ -1,11 +1,5 @@
 export const studentInput = [
   {
-    id: 'student_id',
-    label: 'Student Id: ',
-    type: 'text',
-    placeholder: 'Enter Student Id',
-  },
-  {
     id: 'first_name',
     label: 'First Name: ',
     type: 'text',

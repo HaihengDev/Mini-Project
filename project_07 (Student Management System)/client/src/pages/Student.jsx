@@ -33,7 +33,7 @@ const Page = () => {
     async function loadStudents() {
       try {
         await fetchStudents();
-      } catch(err) {
+      } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
@@ -48,8 +48,8 @@ const Page = () => {
       try {
         const data = await getAll('rooms');
         setRooms(data.rooms ?? []);
-      } catch(err) {
-        throw new Error('Fetch all class failed!', {cause: err});
+      } catch (err) {
+        throw new Error('Fetch all class failed!', { cause: err });
       }
     }
 
@@ -62,11 +62,11 @@ const Page = () => {
   }));
 
   const studentFormInput = studentInput.map((input) => {
-    if(input.id === 'class_id') {
+    if (input.id === 'class_id') {
       return {
         ...input,
-        options: roomsOption
-      }
+        options: roomsOption,
+      };
     }
 
     return input;
@@ -100,7 +100,7 @@ const Page = () => {
     );
   }
 
-  const handleCreateStudent = async(event) => {
+  const handleCreateStudent = async (event) => {
     event.preventDefault();
     setSubmitError('');
     setIsSubmitting(true);
@@ -108,31 +108,31 @@ const Page = () => {
     try {
       const formData = new FormData(event.currentTarget);
 
-      const student_id = formData.get('student_id');
       const first_name = formData.get('first_name');
       const last_name = formData.get('last_name');
       const dob = formData.get('dob');
       const gender = formData.get('gender');
       const class_id = formData.get('class_id');
 
-      await create('students', {
-        student_id,
+      const data = {
         first_name,
         last_name,
         dob,
         gender,
         class_id,
-      });
+      };
 
-      fetchStudents();
+      await create('students', data);
+
+      await fetchStudents();
 
       setIsOpen(false);
-    } catch(err) {
+    } catch (err) {
       setSubmitError(err.message);
     } finally {
       setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <section id="page-container">
@@ -167,7 +167,7 @@ const Page = () => {
 
               <button
                 className="btn btn-primary"
-                disbaled={isSubmitting}
+                disabled={isSubmitting}
                 form={'create-student-form'}
                 type="submit"
               >
