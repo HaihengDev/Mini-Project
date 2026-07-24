@@ -1,17 +1,49 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { teacherTableHeader } from '../config/config.js';
 import { teacherInput } from '../config/input.js';
+import {formatDate} from "../utils/formatDate.js";
+import { getAll, create } from "../endpoints/api.js";
 import { handleExport } from '../services/handleExport.js';
 import TableHeader from '../components/TableHeader.jsx';
 import InputForm from '../components/InputForm.jsx';
 
 const Page = () => {
+  const [teachers, setTeachers] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+
   const [isOpen, setIsOpen] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const fetchTeachers = useCallback(async() => {
+    const timeoutPromise = new Promise((_, reject) => setTimeout(
+      () => reject(new Error('Failed to fetch (request timeout)!')),
+      10000
+    ));
+
+    const data = await Promise.race([getAll('teachers'), timeoutPromise]);
+
+    setTeachers(data.teachers ?? []);
+  }, []);
+
+  useEffect(() => {
+    async function loadTeachers() {
+      try {
+        await fetchTeachers();
+      } catch(err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTeachers();
+  }, [fetchTeachers])
+
   const handleCreateTeacher = async (event) => {
-    event.preventDafault();
+    event.preventDefault();
+
     setSubmitError('');
     setIsSubmitting(true);
 
@@ -19,7 +51,6 @@ const Page = () => {
       const formData = new FormData(event.currentTarget);
 
       const employee_no = formData.get('employee_no');
-      const user_id = formData.get('user_id');
       const first_name = formData.get('first_name');
       const last_name = formData.get('last_name');
       const gender = formData.get('gender');
@@ -28,13 +59,14 @@ const Page = () => {
 
       await create('teachers', {
         employee_no,
-        user_id,
         first_name,
         last_name,
         gender,
         phone,
         joining_date,
       });
+
+      fetchTeachers();
 
       setIsOpen(false);
     } catch (err) {
@@ -43,6 +75,30 @@ const Page = () => {
       setIsSubmitting(false);
     }
   };
+
+  if(loading) {
+    return <div className="loading-container">
+      <div className="spinner"></div>
+      <h2>Loading students...</h2>
+    </div>
+  }
+
+  if(error) {
+    return <div className={"error-container"}>
+      <div className={"error-card"}>
+        <div className={"error-icon"}>⚠️</div>
+        <h2>Oops!</h2>
+        <p>{error}</p>
+
+        <button
+          className={"btn-retry"}
+          onClick={() => window.location.reload()}
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+  }
 
   return (
     <section id="page-container">
@@ -107,9 +163,22 @@ const Page = () => {
         </thead>
 
         <tbody>
-          <tr>
-            <td colSpan={teacherTableHeader.length}>No Teacher Found!</td>
-          </tr>
+          {teachers.length === 0 ?
+            <tr>
+              <td colSpan={teacherTableHeader.length}>No Teacher Found!</td>
+            </tr>
+            :
+            teachers.map((teacher) => (
+              <tr key={teacher.teacher_id}>
+                <td>{teacher.employee_no}</td>
+                <td>{teacher.first_name}</td>
+                <td>{teacher.last_name}</td>
+                <td>{teacher.gender}</td>
+                <td>{teacher.phone}</td>
+                <td>{formatDate(teacher.joining_date)}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </section>

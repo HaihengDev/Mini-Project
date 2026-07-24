@@ -50,12 +50,6 @@ export const teacherInput = [
     placeholder: 'Enter Teacher Id: ',
   },
   {
-    id: 'user_id',
-    label: 'User Id: ',
-    type: 'number',
-    placeholder: 'Enter User Id: ',
-  },
-  {
     id: 'first_name',
     label: 'First Name: ',
     type: 'text',
