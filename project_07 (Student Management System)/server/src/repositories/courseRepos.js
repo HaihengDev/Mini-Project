@@ -2,7 +2,17 @@ import pool from '../config/db.js';
 
 class CourseRepository {
   async findAll() {
-    const [rows] = await pool.query('SELECT * FROM courses');
+    const [rows] = await pool.query(`
+      SELECT
+        c.course_id,
+        c.course_name,
+        c.course_code,
+        c.class_id,
+        cl.class_name
+      FROM courses c
+      LEFT JOIN classes cl
+        ON c.class_id = cl.class_id
+    `);
 
     return rows;
   }
