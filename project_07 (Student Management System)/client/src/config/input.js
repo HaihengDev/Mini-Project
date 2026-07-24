@@ -37,15 +37,6 @@ export const studentInput = [
     type: 'select',
     options: [],
   },
-  {
-    id: 'status',
-    label: 'Status: ',
-    type: 'radio',
-    options: [
-      { value: 'active', label: 'active' },
-      { value: 'graduated', label: 'graduated' },
-    ]
-  }
 ]
 
 export const classInput = [

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getAll } from '../endpoints/api.js';
+import { getAll, create } from '../endpoints/api.js';
 import { studentTableHeader } from '../config/config.js';
 import { handleExport } from '../services/handleExport.js';
 import { studentInput } from '../config/input.js';
@@ -13,6 +13,8 @@ const Page = () => {
   const [loading, setLoading] = useState(true);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const fetchStudents = useCallback(async () => {
     const timeoutPromise = new Promise((_, reject) =>
@@ -98,6 +100,40 @@ const Page = () => {
     );
   }
 
+  const handleCreateStudent = async(event) => {
+    event.preventDefault();
+    setSubmitError('');
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(event.currentTarget);
+
+      const student_id = formData.get('student_id');
+      const first_name = formData.get('first_name');
+      const last_name = formData.get('last_name');
+      const dob = formData.get('dob');
+      const gender = formData.get('gender');
+      const class_id = formData.get('class_id');
+
+      await create('students', {
+        student_id,
+        first_name,
+        last_name,
+        dob,
+        gender,
+        class_id,
+      });
+
+      fetchStudents();
+
+      setIsOpen(false);
+    } catch(err) {
+      setSubmitError(err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <section id="page-container">
       {isOpen && (
@@ -112,7 +148,13 @@ const Page = () => {
             </div>
 
             <div className="modal-body">
-              <InputForm inputElements={studentFormInput} />
+              <InputForm
+                formId={'create-student-form'}
+                inputElements={studentFormInput}
+                onSubmit={handleCreateStudent}
+              />
+
+              {submitError && <p className={'form-error'}>{submitError}</p>}
             </div>
 
             <div className="modal-footer">
@@ -123,7 +165,14 @@ const Page = () => {
                 Cancel
               </button>
 
-              <button className="btn btn-primary">Insert</button>
+              <button
+                className="btn btn-primary"
+                disbaled={isSubmitting}
+                form={'create-student-form'}
+                type="submit"
+              >
+                {isSubmitting ? 'Inserting...' : 'Insert'}
+              </button>
             </div>
           </div>
         </div>
