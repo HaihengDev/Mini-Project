@@ -1,6 +1,6 @@
-import crypto from 'crypto';
 import userService from './userService.js';
 import teacherRepository from '../repositories/teacherRepos.js';
+import {generatePassword} from "../utils/generatePassword.js";
 
 class TeacherService {
   async getAll() {
@@ -36,9 +36,9 @@ class TeacherService {
       .toString()
       .padStart(3, '0');
 
-    const username = `${first_name} ${last_name}`;
+    const username = `${first_name.toLowerCase()}-${last_name.toLowerCase()}`;
     const email = `${first_name.toLowerCase()}${last_name.toLowerCase()}${randomNumber}@email.com`;
-    const password = crypto.randomBytes(8).toString('hex');
+    const password = generatePassword();
 
     const userId = await userService.createUser({
       username,

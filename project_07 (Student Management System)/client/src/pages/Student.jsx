@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getAll } from '../endpoints/api.js';
 import { studentTableHeader } from '../config/config.js';
 import { handleExport } from '../services/handleExport.js';
@@ -14,28 +14,32 @@ const Page = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const fetchStudents = useCallback(async () => {
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(
+        () => reject(new Error('Fetch failed (request time out)!')),
+        3000,
+      ),
+    );
+
+    const data = await Promise.race([getAll('students'), timeoutPromise]);
+
+    setStudents(data.students ?? []);
+  }, []);
+
   useEffect(() => {
-    async function fetchStudents() {
+    async function loadStudents() {
       try {
-        const timeoutPromise = new Promise((_, reject) =>
-          setTimeout(
-            () => reject(new Error('Fetch failed (request time out)!')),
-            3000,
-          ),
-        );
-
-        const data = await Promise.race([getAll('students'), timeoutPromise]);
-
-        setStudents(data.students ?? []);
-      } catch (err) {
+        await fetchStudents();
+      } catch(err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchStudents();
-  }, []);
+    loadStudents();
+  }, [fetchStudents]);
 
   useEffect(() => {
     async function fetchAllRooms() {

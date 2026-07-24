@@ -8,9 +8,11 @@ export const navBar = {
 
 export const studentTableHeader = [
   'Student Id',
-  'Student First Name',
-  'Student Last Name',
+  'First Name',
+  'Last Name',
+  'Date of Birth',
   'Gender',
+  'Age',
 ];
 
 export const classTableHeader = ['Class Id', 'Class Name', 'Academic Year'];
