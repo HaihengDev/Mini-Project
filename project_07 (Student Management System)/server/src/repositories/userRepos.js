@@ -24,7 +24,10 @@ class UserRepos {
       [username, email, password, role],
     );
 
-    return result.insertId;
+    return {
+      user_id: result.insertId,
+      ...user
+    };
   }
 
   async updateLastLogin(id) {

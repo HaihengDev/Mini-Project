@@ -11,14 +11,14 @@ class UserService {
 
     const hashedPassword = await bcrypt.hash(user.password, 10);
 
-    const id = await userRepos.create({
+    const result = await userRepos.create({
       username: user.username,
       email: user.email,
       password: hashedPassword,
       role: user.role || 'student',
     });
 
-    return id;
+    return result.user_id;
   }
 }
 
