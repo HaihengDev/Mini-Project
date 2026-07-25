@@ -5,12 +5,34 @@ import {
   getStudentById,
   exportList,
 } from '../controllers/studentController.js';
+import {authenticateToken} from "../middleware/authenticateToken.js";
+import {authorizeRoles} from "../middleware/authorizeRoles.js";
 
 const router = express.Router();
 
-router.get('/', getAllStudents);
-router.get('/download', exportList);
-router.get('/:id', getStudentById);
-router.post('/', createStudent);
+router.get(
+  '/',
+  authenticateToken,
+  authorizeRoles('admin', 'teacher'),
+  getAllStudents
+);
+router.get(
+  '/download',
+  authenticateToken,
+  authorizeRoles('admin', 'teacher'),
+  exportList
+);
+router.get(
+  '/:id',
+  authenticateToken,
+  authorizeRoles('admin', 'teacher'),
+  getStudentById
+);
+router.post(
+  '/',
+  authenticateToken,
+  authorizeRoles('admin'),
+  createStudent
+);
 
 export default router;
