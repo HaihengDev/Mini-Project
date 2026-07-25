@@ -1,7 +1,7 @@
 const apiUrl = 'http://localhost:8888/api';
+const token = localStorage.getItem('token');
 
 export const getAll = async (path) => {
-  const token = localStorage.getItem('token');
 
   const response = await fetch(`${apiUrl}/${path}`, {
     method: 'GET',
@@ -22,6 +22,7 @@ export const create = async (path, data) => {
   const response = await fetch(`${apiUrl}/${path}`, {
     method: 'POST',
     headers: {
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -31,11 +32,17 @@ export const create = async (path, data) => {
     throw new Error(`Failed to create ${path}!`);
   }
 
-  return response.json();
+  return await response.json();
 };
 
 export const exportList = async (path) => {
-  const response = await fetch(`${apiUrl}/${path}/download`);
+  const response = await fetch(`${apiUrl}/${path}/download`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
 
   if (!response.ok) {
     throw new Error('Failed to export student list!');
