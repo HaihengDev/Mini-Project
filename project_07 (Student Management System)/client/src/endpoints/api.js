@@ -1,13 +1,21 @@
 const apiUrl = 'http://localhost:8888/api';
 
 export const getAll = async (path) => {
-  const response = await fetch(`${apiUrl}/${path}`);
+  const token = localStorage.getItem('token');
+
+  const response = await fetch(`${apiUrl}/${path}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
 
   if (!response.ok) {
     throw new Error('Failed to fetch students!');
   }
 
-  return response.json();
+  return await response.json();
 };
 
 export const create = async (path, data) => {
@@ -49,7 +57,7 @@ export const exportList = async (path) => {
 };
 
 export const login = async (email, password) => {
-  const response = await fetch(`${apiUrl}/login`, {
+  const response = await fetch(`${apiUrl}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

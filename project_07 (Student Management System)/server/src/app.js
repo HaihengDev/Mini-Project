@@ -19,7 +19,7 @@ app.use('/api/students', studentRoute);
 app.use('/api/teachers', teacherRoute);
 app.use('/api/courses', courseRoute);
 app.use('/api/auth', authRoute);
-app.use('/api/user', userRoute);
+app.use('/api/users', userRoute);
 
 const startServer = () => {
   try {
