@@ -6,6 +6,7 @@ import roomRoute from './routes/roomRoute.js';
 import studentRoute from './routes/studentRoute.js';
 import teacherRoute from './routes/teacherRoute.js';
 import courseRoute from './routes/courseRoute.js';
+import authRoute from './routes/authRoute.js';
 dotenv.config();
 
 const app = express();
@@ -16,6 +17,7 @@ app.use('/api/rooms', roomRoute);
 app.use('/api/students', studentRoute);
 app.use('/api/teachers', teacherRoute);
 app.use('/api/courses', courseRoute);
+app.use('/api/auth', authRoute);
 
 const startServer = () => {
   try {
