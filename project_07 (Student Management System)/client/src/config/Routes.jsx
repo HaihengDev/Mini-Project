@@ -7,10 +7,6 @@ import Login from '../pages/Login.jsx';
 
 const routes = [
   {
-    path: '/',
-    element: <Home />,
-  },
-  {
     path: '/home',
     element: <Home />,
   },
