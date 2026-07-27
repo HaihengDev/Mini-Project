@@ -1,5 +1,9 @@
+import { PutObjectCommand } from '@aws-sdk/client-s3';
+import r2 from '../config/r2.js';
+import crypt from 'crypto';
 import ExcelJs from 'exceljs';
 import studentService from '../services/studentService.js';
+import uploadService from '../services/uploadService.js';
 
 export const getAllStudents = async (req, res) => {
   try {
@@ -42,7 +46,16 @@ export const getStudentById = async (req, res) => {
 
 export const createStudent = async (req, res) => {
   try {
-    const studentCreated = await studentService.create(req.body);
+    const file = req.file;
+
+    const image = await uploadService.uploadImage('students', file);
+
+    const studnetData = {
+      ...req.body,
+      photo_url: image.imgUrl,
+    };
+
+    const studentCreated = await studentService.create(studnetData);
 
     res.status(201).json({
       message: 'Student is created successfully!',

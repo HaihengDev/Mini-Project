@@ -16,13 +16,13 @@ class StudentRepos {
   }
 
   async create(student) {
-    const { user_id, first_name, last_name, dob, gender, class_id } = student;
+    const { user_id, first_name, last_name, dob, gender, class_id, photo_url } = student;
 
     const [studentCreated] = await pool.query(
-      `INSERT INTO students (user_id, first_name, last_name, dob, gender, class_id)
-        VALUES (?, ?, ?, ?, ?, ?)
+      `INSERT INTO students (user_id, first_name, last_name, dob, gender, class_id, photo_url)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
       `,
-      [user_id, first_name, last_name, dob, gender, class_id],
+      [user_id, first_name, last_name, dob, gender, class_id, photo_url],
     );
 
     return studentCreated.insertId;

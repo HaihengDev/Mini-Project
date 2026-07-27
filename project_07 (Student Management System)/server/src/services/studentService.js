@@ -12,7 +12,7 @@ class StudentService {
   }
 
   async create(student) {
-    const { first_name, last_name, dob, gender, class_id } = student;
+    const { first_name, last_name, dob, gender, class_id, photo_url } = student;
 
     if (!first_name || !last_name || !dob || !gender || !class_id) {
       throw new Error('All student information is required!');
@@ -41,6 +41,7 @@ class StudentService {
       dob,
       gender,
       class_id,
+      photo_url
     });
 
     return {
