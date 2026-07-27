@@ -1,4 +1,6 @@
 import express from 'express';
+import upload from '../middleware/upload.js';
+import {uploadImage} from '../controllers/uploadController.js';
 import {
   createStudent,
   getAllStudents,
@@ -32,6 +34,8 @@ router.post(
   '/',
   authenticateToken,
   authorizeRoles('admin'),
+  upload.single('image'),
+  uploadImage,
   createStudent
 );
 
