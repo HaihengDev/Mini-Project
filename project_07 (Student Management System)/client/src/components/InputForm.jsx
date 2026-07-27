@@ -1,6 +1,27 @@
+import {useEffect, useState} from 'react';
 import './style/input-form.css';
 
 export default function InputForm({ inputElements, formId, onSubmit }) {
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+
+    if(file) {
+      setImagePreview(URL.createObjectURL(file));
+    } else {
+      setImagePreview(null);
+    }
+  }
+
+  useEffect(() => {
+    return () => {
+      if(imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
+
   return (
     <form className="form-wrapper" id={formId} onSubmit={onSubmit}>
       {inputElements.map((input) => (
@@ -71,6 +92,27 @@ export default function InputForm({ inputElements, formId, onSubmit }) {
                 </option>
               ))}
             </select>
+          ) : input.type === 'file' ? (
+            <>
+              <input
+                className="form-input"
+                type={"file"}
+                id={input.id}
+                name={input.id}
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+
+              {imagePreview && (
+                <div className={"image-preview"}>
+                  <img
+                    src={imagePreview}
+                    alt="Selected preview"
+                    className="preview-image"
+                  />
+                </div>
+              )}
+            </>
           ) : (
             <input
               className="form-input"

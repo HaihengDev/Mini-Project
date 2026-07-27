@@ -119,6 +119,18 @@
   appearance: textfield;
 }
 
+.image-preview {
+  margin-top: 15px;
+}
+
+.preview-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
 @media (max-width: 480px) {
   .form-wrapper {
     gap: 1rem;

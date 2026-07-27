@@ -31,6 +31,11 @@ export const studentInput = [
     type: 'select',
     options: [],
   },
+  {
+    id: 'photo_url',
+    label: 'Student Image: ',
+    type: 'file',
+  }
 ]
 
 export const classInput = [

@@ -115,6 +115,7 @@ const Page = () => {
       const dob = formData.get('dob');
       const gender = formData.get('gender');
       const class_id = formData.get('class_id');
+      const photo_url = formData.get('photo_url');
 
       const data = {
         first_name,
@@ -122,6 +123,7 @@ const Page = () => {
         dob,
         gender,
         class_id,
+        photo_url
       };
 
       await create('students', data);
