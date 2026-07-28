@@ -20,7 +20,7 @@ class UploadService {
 
     await r2.send(command);
 
-    const imgUrl = `${process.env.R2_PUBLIC_URL}/${fileName}`;
+    const imgUrl = `${process.env.R2_ENDPOINT}/${fileName}`;
 
     return {
       fileName,

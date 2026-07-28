@@ -31,8 +31,8 @@ router.get(
 );
 router.post(
   '/',
-  authenticateToken,
-  authorizeRoles('admin'),
+  // authenticateToken,
+  // authorizeRoles('admin'),
   upload.single('photo_url'),
   createStudent,
 );

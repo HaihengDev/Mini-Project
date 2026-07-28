@@ -46,16 +46,19 @@ export const getStudentById = async (req, res) => {
 
 export const createStudent = async (req, res) => {
   try {
-    const file = req.file;
+    let photo_url = null;
 
-    const image = await uploadService.uploadImage('students', file);
+    if(req.file) {
+      const image = await uploadService.uploadImage('students', req.file);
+      photo_url = image.imgUrl;
+    }
 
-    const studnetData = {
+    const studentData = {
       ...req.body,
-      photo_url: image.imgUrl,
+      photo_url,
     };
 
-    const studentCreated = await studentService.create(studnetData);
+    const studentCreated = await studentService.create(studentData);
 
     res.status(201).json({
       message: 'Student is created successfully!',

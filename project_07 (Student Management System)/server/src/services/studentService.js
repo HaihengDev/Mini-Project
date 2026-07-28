@@ -32,6 +32,7 @@ class StudentService {
       username,
       email,
       password,
+      role: 'student',
     });
 
     const studentCreated = await studentRepository.create({
