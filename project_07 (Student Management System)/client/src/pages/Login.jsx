@@ -122,6 +122,14 @@ const Page = () => {
         >
           {loading ? 'Signing In...' : 'Sign In'}
         </button>
+
+        <button
+          className="forgot-password"
+          type={'button'}
+          onClick={() => navigate('/forgot-password')}
+        >
+          Forgot Password?
+        </button>
       </form>
     </div>
   );
