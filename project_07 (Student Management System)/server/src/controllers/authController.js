@@ -22,3 +22,70 @@ export const login = async (req, res) => {
     });
   }
 };
+
+export const forgotPassword = async(req, res) => {
+  try {
+    const {email} = req.body;
+
+    if(!email) {
+      return res.status(400).json({
+        message: 'Email is required.'
+      });
+    }
+
+    const result = await authService.forgotPassword(email);
+
+    return res.status(200).json(result);
+  } catch(err) {
+    console.error(err);
+
+    res.status(500).json({
+      message: 'Server Error',
+      result: err.message,
+    })
+  }
+}
+
+export const verifyOtp = async(req, res) => {
+  try {
+    const {email, otp} = req.body;
+
+    if(!email || !otp) {
+      return res.status(400).json({
+        message: 'Email and OTP are required.',
+      });
+    }
+
+    const result = await authService.verifyOtp(email, otp);
+
+    return res.status(200).json(result);
+  } catch(err) {
+    console.error(err);
+
+    return res.status(500).json({
+      message: err.message,
+    })
+  }
+}
+
+export const resetPassword = async(req, res) => {
+  try {
+    const {email, otp, newPassword} = req.body;
+
+    if(!email || !otp || !newPassword) {
+      return res.status(400).json({
+        message: 'Email, OTP and new password are required.',
+      });
+    }
+
+    const result = await authService.resetPassword(email, otp, newPassword);
+
+    return res.status(200).json(result);
+  } catch(err) {
+    console.error(err);
+
+    return res.status(500).json({
+      message: err.message,
+    });
+  }
+}
