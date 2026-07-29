@@ -4,7 +4,7 @@ import Teacher from '../pages/Teacher.jsx';
 import Room from '../pages/Room.jsx';
 import Course from '../pages/Course.jsx';
 
-const routes = [
+const mainPageRoutes = [
   {
     path: '/',
     element: <Home />,
@@ -31,4 +31,4 @@ const routes = [
   },
 ];
 
-export default routes;
+export default mainPageRoutes;
