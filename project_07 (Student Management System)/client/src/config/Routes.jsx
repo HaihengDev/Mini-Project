@@ -3,9 +3,12 @@ import Student from '../pages/Student.jsx';
 import Teacher from '../pages/Teacher.jsx';
 import Room from '../pages/Room.jsx';
 import Course from '../pages/Course.jsx';
-import Login from '../pages/Login.jsx';
 
 const routes = [
+  {
+    path: '/',
+    element: <Home />,
+  },
   {
     path: '/home',
     element: <Home />,
@@ -25,10 +28,6 @@ const routes = [
   {
     path: '/courses',
     element: <Course />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
   },
 ];
 
