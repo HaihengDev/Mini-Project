@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import userRepos from '../repositories/userRepos.js';
 import { generateToken } from '../utils/jwt.js';
+import {generateOtp} from "../utils/generateOtp.js";
 
 class AuthService {
   async login(email, password) {
@@ -27,6 +28,68 @@ class AuthService {
         role: user.role,
       },
     };
+  }
+
+  async forgotPassword(email) {
+    const user = await userRepos.findByEmail(email);
+
+    if(!user) {
+      throw new Error('User not found.');
+    }
+
+    const otp = generateOtp();
+
+    const expires = new Date(Date.now() + 5 * 60 * 100);
+
+    await userRepos.saveResetOtp(
+      user.user_id,
+      otp,
+      expires
+    );
+
+    console.log('================================');
+    console.log(`Password Reset OTP: ${otp}`);
+    console.log(`Email: ${email}`);
+    console.log(`Expires: ${expires}`);
+    console.log('================================');
+
+    return {
+      message: 'OTP Generated successfully.'
+    }
+  }
+
+  async verifyOtp(email, otp) {
+    const user = await userRepos.verifyResetOtp(
+      email,
+      otp
+    );
+
+    if(!user) {
+      throw new Error('Invalid or expired OTP.')
+    }
+
+    return {
+      message: 'OTP verified successfully.'
+    }
+  }
+
+  async resetPassword(email, otp, newPassword) {
+    const user = await userRepos.verifyResetOtp(email, otp);
+
+    if(!user) {
+      throw new Error('Invalid or expire OTP.')
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await userRepos.updatePassword(
+      user.user_id,
+      hashedPassword
+    );
+
+    return {
+      message: 'Password reset successfully.'
+    }
   }
 }
 

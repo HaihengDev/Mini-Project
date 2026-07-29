@@ -1,14 +1,6 @@
 import pool from '../config/db.js';
 
 class UserRepos {
-  async findByEmail(email) {
-    const [rows] = await pool.query(`SELECT * FROM users WHERE email = ?`, [
-      email,
-    ]);
-
-    return rows[0];
-  }
-
   async findById(id) {
     const [rows] = await pool.query(`SELECT * FROM users WHERE user_id = ?`, [
       id,
@@ -34,6 +26,62 @@ class UserRepos {
     await pool.query(`UPDATE users SET last_login = NOW() WHERE user_id = ?`, [
       id,
     ]);
+  }
+
+  async findByEmail(email) {
+    const [rows] = await pool.query(`SELECT * FROM users WHERE email = ?`, [
+      email,
+    ]);
+
+    return rows[0];
+  }
+
+  async saveResetOtp(userId, otp, expires) {
+    await pool.query(`
+      UPDATE users
+      SET reset_otp = ?, reset_otp_expires = ?
+      WHERE user_id = ?
+    `,
+      [otp, expires, userId]
+    );
+  }
+
+  async verifyResetOtp(email, otp){
+    const [rows] = await pool.query(`
+      SELECT user_id, reset_otp, reset_otp_expires
+      FROM users
+      WHERE email = ?
+    `, [email]);
+
+    const user = rows[0];
+
+    if(!user) {
+      return null;
+    }
+
+    if(user.reset_top !== otp) {
+      return null;
+    }
+
+    if(
+      !user.reset_otp_expires ||
+      new Date() > new Date(user.reset_otp_expires)
+    ) {
+      return null;
+    }
+
+    return user;
+  }
+
+  async updatePassword(userId, hashedPassword) {
+    await pool.query(
+      `UPDATE users
+      SET password = ?,
+          reset_otp = NULL,
+          reset_otp_expires = NULL
+          WHERE user_id = ?`,
+      [hashedPassword, userId]
+    );
   }
 }
 
