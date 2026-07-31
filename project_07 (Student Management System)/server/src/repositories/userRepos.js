@@ -39,7 +39,7 @@ class UserRepos {
   async saveResetOtp(userId, otp, expires) {
     await pool.query(`
       UPDATE users
-      SET reset_otp = ?, reset_otp_expires = ?
+      SET reset_password_token = ?, reset_password_expires = ?
       WHERE user_id = ?
     `,
       [otp, expires, userId]
@@ -48,7 +48,7 @@ class UserRepos {
 
   async verifyResetOtp(email, otp){
     const [rows] = await pool.query(`
-      SELECT user_id, reset_otp, reset_otp_expires
+      SELECT user_id, reset_password_token, reset_password_expires
       FROM users
       WHERE email = ?
     `, [email]);
@@ -59,13 +59,13 @@ class UserRepos {
       return null;
     }
 
-    if(user.reset_top !== otp) {
+    if(user.reset_password_token !== otp) {
       return null;
     }
 
     if(
-      !user.reset_otp_expires ||
-      new Date() > new Date(user.reset_otp_expires)
+      !user.reset_password_expires ||
+      new Date() > new Date(user.reset_password_expires)
     ) {
       return null;
     }
@@ -77,8 +77,8 @@ class UserRepos {
     await pool.query(
       `UPDATE users
       SET password = ?,
-          reset_otp = NULL,
-          reset_otp_expires = NULL
+          reset_password_token = NULL,
+          reset_password_expires = NULL
           WHERE user_id = ?`,
       [hashedPassword, userId]
     );

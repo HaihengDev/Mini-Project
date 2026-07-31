@@ -13,8 +13,6 @@ const Page = () => {
 
   const inputRefs = useRef([]);
 
-  const email = sessionStorage.getItem('resetEmail');
-
   const handleChange = (value, index) => {
     // Only allow numbers
     if (!/^\d*$/.test(value)) {
@@ -42,6 +40,13 @@ const Page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    const email = sessionStorage.getItem('resetEmail');
+
+    if(!email) {
+      setError('Email is required. Please request a new OTP.');
+      return;
+    }
 
     const otpCode = otp.join('');
 
@@ -79,7 +84,6 @@ const Page = () => {
         <div className="verify-otp-header">
           {' '}
           <h1>Verify OTP</h1>
-          ```
           <p>Enter the 6-digit OTP sent to your email.</p>
         </div>
         {error && <div className="verify-otp-error">{error}</div>}

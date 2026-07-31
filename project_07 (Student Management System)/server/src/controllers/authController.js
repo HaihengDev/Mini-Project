@@ -29,6 +29,7 @@ export const forgotPassword = async(req, res) => {
 
     if(!email) {
       return res.status(400).json({
+        success: false,
         message: 'Email is required.'
       });
     }
@@ -40,6 +41,7 @@ export const forgotPassword = async(req, res) => {
     console.error(err);
 
     res.status(500).json({
+      success: false,
       message: 'Server Error',
       result: err.message,
     })
@@ -52,6 +54,7 @@ export const verifyOtp = async(req, res) => {
 
     if(!email || !otp) {
       return res.status(400).json({
+        success: false,
         message: 'Email and OTP are required.',
       });
     }
@@ -63,6 +66,7 @@ export const verifyOtp = async(req, res) => {
     console.error(err);
 
     return res.status(500).json({
+      success: false,
       message: err.message,
     })
   }
@@ -74,6 +78,7 @@ export const resetPassword = async(req, res) => {
 
     if(!email || !otp || !newPassword) {
       return res.status(400).json({
+        success: false,
         message: 'Email, OTP and new password are required.',
       });
     }
@@ -85,6 +90,7 @@ export const resetPassword = async(req, res) => {
     console.error(err);
 
     return res.status(500).json({
+      success: false,
       message: err.message,
     });
   }

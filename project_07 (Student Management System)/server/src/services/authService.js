@@ -54,6 +54,7 @@ class AuthService {
     console.log('================================');
 
     return {
+      success: true,
       message: 'OTP Generated successfully.'
     }
   }
@@ -69,6 +70,7 @@ class AuthService {
     }
 
     return {
+      success: true,
       message: 'OTP verified successfully.'
     }
   }
@@ -88,6 +90,7 @@ class AuthService {
     );
 
     return {
+      success: true,
       message: 'Password reset successfully.'
     }
   }
