@@ -4,8 +4,8 @@ import Teacher from '../pages/Teacher.jsx';
 import Room from '../pages/Room.jsx';
 import Course from '../pages/Course.jsx';
 import Login from '../pages/Login.jsx';
-import ForgotPassword from "../pages/ForgotPassword.jsx";
-import VerifyOtp from "../pages/VerifyOtp.jsx";
+import ForgotPassword from '../pages/ForgotPassword.jsx';
+import VerifyOtp from '../pages/VerifyOtp.jsx';
 import ResetPassword from '../pages/ResetPassword.jsx';
 
 export const mainPageRoutes = [
@@ -38,18 +38,18 @@ export const mainPageRoutes = [
 export const authRoutes = [
   {
     path: '/login',
-    element: <Login />
+    element: <Login />,
   },
   {
     path: '/forgot-password',
-    element: <ForgotPassword />
+    element: <ForgotPassword />,
   },
   {
     path: '/verify-otp',
-    element: <VerifyOtp />
+    element: <VerifyOtp />,
   },
   {
     path: '/reset-password',
     element: <ResetPassword />,
-  }
-]
+  },
+];

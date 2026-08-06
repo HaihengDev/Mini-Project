@@ -26,7 +26,7 @@ const Page = () => {
     const data = await Promise.race([getAll('courses'), timeoutPromise]);
 
     setCourses(data.courses ?? []);
-  });
+  }, []);
 
   useEffect(() => {
     async function loadCourses() {
