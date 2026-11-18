@@ -1,5 +1,13 @@
+import AppRouter from './components/AppRouter';
+import Header from './components/Header';
+
 const App = () => {
-  return <h1>Hello</h1>;
+  return (
+    <>
+      <Header />
+      <AppRouter />
+    </>
+  );
 };
 
 export default App;
