@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import type { INavbarRoutes } from '../types/route.type';
-import { navbarRoutes } from '../config/Routes';
+import type { INavbarRoutes } from '../../types/route.type';
+import { navbarRoutes } from '../../config/Routes';
 import Link from './Link';
 import './style/header.css';
 
