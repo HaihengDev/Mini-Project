@@ -58,11 +58,12 @@ export async function createChapter(
   res: Response,
 ): Promise<Response<IChapter | null>> {
   try {
-    const { chapter_id, title, novel } = req.body;
+    const { chapter_id, title, description, novel } = req.body;
 
     const chapter: IChapter = {
       chapter_id,
       title,
+      description,
       novel,
     };
 
@@ -86,11 +87,12 @@ export async function updateChapter(
 ): Promise<Response<IChapter | null>> {
   try {
     const id = req.params.id as string;
-    const { chapter_id, title, novel } = req.body;
+    const { chapter_id, title, description, novel } = req.body;
 
     const newChapter: IChapter = {
       chapter_id,
       title,
+      description,
       novel,
     };
 

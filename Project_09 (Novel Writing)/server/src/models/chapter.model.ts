@@ -11,6 +11,10 @@ const chapterSchema = new mongoose.Schema<IChapter>(
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+      required: true,
+    },
     novel: {
       type: String,
       required: true,

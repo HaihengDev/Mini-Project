@@ -6,5 +6,6 @@ export interface INovel {
 export interface IChapter {
   chapter_id: string;
   title: string;
+  description: string;
   novel: string;
 }
