@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import type { INavbarRoutes } from '../../types/route.type';
 import { navbarRoutes } from '../../config/Routes';
 import Link from './Link';
-import './style/header.css';
+import '../style/header.css';
 
 export default function Navbar(): ReactElement {
   return (

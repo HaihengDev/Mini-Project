@@ -1,6 +1,7 @@
 import HomePage from '../pages/HomePage';
 import NovelPage from '../pages/NovelPage';
 import CommunityPage from '../pages/CommunityPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 export const routes = [
   {
@@ -18,6 +19,10 @@ export const routes = [
   {
     path: '/community',
     element: <CommunityPage />,
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ];
 
