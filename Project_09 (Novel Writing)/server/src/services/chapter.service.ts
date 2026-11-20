@@ -10,6 +10,10 @@ class ChapterService {
     return await ChapterRepository.findById(id);
   }
 
+  async getByNovelId(id: string): Promise<IChapter[]> {
+    return await ChapterRepository.findByNovelId(id);
+  }
+
   async create(chapter: IChapter): Promise<IChapter | null> {
     return await ChapterRepository.create(chapter);
   }

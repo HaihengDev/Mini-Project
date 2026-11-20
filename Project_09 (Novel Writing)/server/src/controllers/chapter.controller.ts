@@ -2,7 +2,9 @@ import { Request, Response } from 'express';
 import ChapterService from '../services/chapter.service';
 import { IChapter } from '../types/types';
 
-export async function readAllChapters(res: Response) {
+export async function readAllChapters(
+  res: Response,
+): Promise<Response<IChapter[]>> {
   try {
     const chapters = await ChapterService.getAll();
 
@@ -15,7 +17,10 @@ export async function readAllChapters(res: Response) {
   }
 }
 
-export async function readChapterById(req: Request, res: Response) {
+export async function readChapterById(
+  req: Request,
+  res: Response,
+): Promise<Response<IChapter | null>> {
   try {
     const id = req.params.id as string;
 
@@ -30,7 +35,28 @@ export async function readChapterById(req: Request, res: Response) {
   }
 }
 
-export async function createChapter(req: Request, res: Response) {
+export async function readAllChapterByNovelId(
+  req: Request,
+  res: Response,
+): Promise<Response<IChapter[]>> {
+  try {
+    const novelId = req.params.novelId as string;
+
+    const chapters = await ChapterService.getByNovelId(novelId);
+
+    return res.status(200).json({ data: chapters });
+  } catch (err: unknown) {
+    return res.status(500).json({
+      message: 'Server Error',
+      error: err,
+    });
+  }
+}
+
+export async function createChapter(
+  req: Request,
+  res: Response,
+): Promise<Response<IChapter | null>> {
   try {
     const { chapter_id, title, novel } = req.body;
 
@@ -54,7 +80,10 @@ export async function createChapter(req: Request, res: Response) {
   }
 }
 
-export async function updateChapter(req: Request, res: Response) {
+export async function updateChapter(
+  req: Request,
+  res: Response,
+): Promise<Response<IChapter | null>> {
   try {
     const id = req.params.id as string;
     const { chapter_id, title, novel } = req.body;
@@ -79,7 +108,10 @@ export async function updateChapter(req: Request, res: Response) {
   }
 }
 
-export async function deleteChapter(req: Request, res: Response) {
+export async function deleteChapter(
+  req: Request,
+  res: Response,
+): Promise<Response<IChapter | null>> {
   try {
     const id = req.params.id as string;
 
