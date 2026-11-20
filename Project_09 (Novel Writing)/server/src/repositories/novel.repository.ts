@@ -20,7 +20,7 @@ class NovelRepository {
     });
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<INovel | null> {
     return await Novel.findOneAndDelete({ novel_id: id });
   }
 }
