@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { readAll } from '../endpoints/api';
 
-export async function fetchAll<T>(path: string) {
+export function useReadAll<T>(path: string) {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);

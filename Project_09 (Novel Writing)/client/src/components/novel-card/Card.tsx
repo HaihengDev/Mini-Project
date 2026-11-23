@@ -5,12 +5,12 @@ export default function Card({
   chapterCount,
 }: {
   title: string;
-  chapterCount: number;
+  chapterCount?: number;
 }): ReactElement {
   return (
     <section className="card-container">
       <h3>{title}</h3>
-      <p>chapters: {chapterCount}</p>
+      {chapterCount !== undefined && <p>chapters: {chapterCount}</p>}
     </section>
   );
 }
