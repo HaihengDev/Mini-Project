@@ -1,7 +1,8 @@
 import type { ReactElement } from 'react';
+import CardList from '../components/novel-card/CardList';
 
 const Page = (): ReactElement => {
-  return <h1>Novel Page</h1>;
+  return <CardList />;
 };
 
 export default Page;
